@@ -1,0 +1,27 @@
+{
+  "name": "pageon/slack-monolog",
+  "description": "A monolog handler for slack integration",
+  "keywords": [
+    "monolog",
+    "slack"
+  ],
+  "version": "0.1.0",
+  "minimum-stability": "stable",
+  "license": "GPL3",
+  "authors": [
+    {
+      "name": "Jelmer Prins",
+      "email": "jelmer@pageon.be"
+    }
+  ],
+  "autoload": {
+    "autoload": {
+      "psr-4": {
+        "Pageon\\SlackMonolog\\": "src/"
+      }
+    }
+  },
+  "require": {
+    "monolog/monolog": "^1.17"
+  }
+}
