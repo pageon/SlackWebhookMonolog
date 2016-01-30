@@ -15,10 +15,9 @@
     }
   ],
   "autoload": {
-    "autoload": {
-      "psr-4": {
-        "Pageon\\SlackMonolog\\": "src/"
-      }
+    "psr-4": {
+      "Pageon\\SlackMonolog\\": "src/",
+      "Pageon\\SlackMonolog\\Tests\\": "tests/"
     }
   },
   "require": {
