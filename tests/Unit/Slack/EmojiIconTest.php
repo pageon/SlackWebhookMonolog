@@ -1,9 +1,9 @@
 <?php
 
-namespace Pageon\SlackMonolog\Tests;
+namespace Pageon\SlackWebhookMonolog\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Pageon\SlackMonolog\Slack\EmojiIcon;
+use Pageon\SlackWebhookMonolog\Slack\EmojiIcon;
 
 class EmojiIconTest extends PHPUnit_Framework_TestCase
 {
@@ -13,7 +13,7 @@ class EmojiIconTest extends PHPUnit_Framework_TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            'Pageon\SlackMonolog\Slack\Interfaces\IconInterface',
+            'Pageon\SlackWebhookMonolog\Slack\Interfaces\IconInterface',
             new EmojiIcon(':kissing_closed_eyes:'),
             "The class doesn't implement the IconInterface"
         );
@@ -45,7 +45,7 @@ class EmojiIconTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateEmoji()
     {
-        $this->setExpectedException('Pageon\SlackMonolog\Slack\Exceptions\InvalidEmojiException');
+        $this->setExpectedException('Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidEmojiException');
         new EmojiIcon('notAn Empji');
     }
 

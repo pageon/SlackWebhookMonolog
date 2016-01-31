@@ -1,6 +1,6 @@
 <?php
 
-namespace Pageon\SlackMonolog\Slack\Interfaces;
+namespace Pageon\SlackWebhookMonolog\Slack\Interfaces;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>

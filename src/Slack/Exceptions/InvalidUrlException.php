@@ -1,6 +1,6 @@
 <?php
 
-namespace Pageon\SlackMonolog\Slack\Exceptions;
+namespace Pageon\SlackWebhookMonolog\Slack\Exceptions;
 
 use InvalidArgumentException;
 

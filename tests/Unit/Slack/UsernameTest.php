@@ -1,9 +1,9 @@
 <?php
 
-namespace Pageon\SlackMonolog\Tests;
+namespace Pageon\SlackWebhookMonolog\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Pageon\SlackMonolog\Slack\Username;
+use Pageon\SlackWebhookMonolog\Slack\Username;
 
 class UsernameTest extends PHPUnit_Framework_TestCase
 {
@@ -13,7 +13,7 @@ class UsernameTest extends PHPUnit_Framework_TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            'Pageon\SlackMonolog\Slack\Interfaces\UsernameInterface',
+            'Pageon\SlackWebhookMonolog\Slack\Interfaces\UsernameInterface',
             new Username('Pageon'),
             "The class doesn't implement the UsernameInterface"
         );

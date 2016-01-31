@@ -1,9 +1,9 @@
 <?php
 
-namespace Pageon\SlackMonolog\Slack;
+namespace Pageon\SlackWebhookMonolog\Slack;
 
-use Pageon\SlackMonolog\Slack\Exceptions\InvalidEmojiException;
-use Pageon\SlackMonolog\Slack\Interfaces\IconInterface;
+use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidEmojiException;
+use Pageon\SlackWebhookMonolog\Slack\Interfaces\IconInterface;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>

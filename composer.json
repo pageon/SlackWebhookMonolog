@@ -1,5 +1,5 @@
 {
-  "name": "pageon/slack-monolog",
+  "name": "pageon/slack-webhook-monolog",
   "description": "A monolog handler for slack integration using webhooks",
   "keywords": [
     "monolog",
@@ -17,12 +17,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "Pageon\\SlackMonolog\\": "src/",
+      "Pageon\\SlackWebhookMonolog\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Pageon\\SlackMonolog\\Tests\\": "tests/"
+      "Pageon\\SlackWebhookMonolog\\Tests\\": "tests/"
     }
   },
   "require": {

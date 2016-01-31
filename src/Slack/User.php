@@ -1,10 +1,10 @@
 <?php
 
-namespace Pageon\SlackMonolog\Slack;
+namespace Pageon\SlackWebhookMonolog\Slack;
 
-use Pageon\SlackMonolog\Slack\Interfaces\IconInterface;
-use Pageon\SlackMonolog\Slack\Interfaces\UserInterface;
-use Pageon\SlackMonolog\Slack\Interfaces\UsernameInterface;
+use Pageon\SlackWebhookMonolog\Slack\Interfaces\IconInterface;
+use Pageon\SlackWebhookMonolog\Slack\Interfaces\UserInterface;
+use Pageon\SlackWebhookMonolog\Slack\Interfaces\UsernameInterface;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>

@@ -1,9 +1,9 @@
 <?php
 
-namespace Pageon\SlackMonolog\Tests;
+namespace Pageon\SlackWebhookMonolog\Tests;
 
 use PHPUnit_Framework_TestCase;
-use Pageon\SlackMonolog\Slack\UrlIcon;
+use Pageon\SlackWebhookMonolog\Slack\UrlIcon;
 
 class UrlIconTest extends PHPUnit_Framework_TestCase
 {
@@ -13,7 +13,7 @@ class UrlIconTest extends PHPUnit_Framework_TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            'Pageon\SlackMonolog\Slack\Interfaces\IconInterface',
+            'Pageon\SlackWebhookMonolog\Slack\Interfaces\IconInterface',
             new UrlIcon('http://placehold.it/512x512.png'),
             "The class doesn't implement the IconInterface"
         );
@@ -44,7 +44,7 @@ class UrlIconTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateUrl()
     {
-        $this->setExpectedException('Pageon\SlackMonolog\Slack\Exceptions\InvalidUrlException');
+        $this->setExpectedException('Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidUrlException');
         new UrlIcon('notAnUrl');
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pageon\SlackMonolog\Slack;
+namespace Pageon\SlackWebhookMonolog\Slack;
 
-use Pageon\SlackMonolog\Slack\Interfaces\UsernameInterface;
+use Pageon\SlackWebhookMonolog\Slack\Interfaces\UsernameInterface;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>

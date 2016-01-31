@@ -1,10 +1,10 @@
 <?php
 
-namespace Pageon\SlackMonolog\Tests;
+namespace Pageon\SlackWebhookMonolog\Tests;
 
-use Pageon\SlackMonolog\Slack\EmojiIcon;
-use Pageon\SlackMonolog\Slack\User;
-use Pageon\SlackMonolog\Slack\Username;
+use Pageon\SlackWebhookMonolog\Slack\EmojiIcon;
+use Pageon\SlackWebhookMonolog\Slack\User;
+use Pageon\SlackWebhookMonolog\Slack\Username;
 use PHPUnit_Framework_TestCase;
 
 class UserTest extends PHPUnit_Framework_TestCase
@@ -15,7 +15,7 @@ class UserTest extends PHPUnit_Framework_TestCase
     public function testInterface()
     {
         $this->assertInstanceOf(
-            'Pageon\SlackMonolog\Slack\Interfaces\UserInterface',
+            'Pageon\SlackWebhookMonolog\Slack\Interfaces\UserInterface',
             new User(),
             "The class doesn't implement the UserInterface"
         );
