@@ -29,7 +29,7 @@ class Config implements ConfigInterface
      * Config constructor.
      *
      * @param WebhookInterface $webhook
-     * @param UserInterface|null $user
+     * @param UserInterface|null $customUser
      */
     public function __construct(WebhookInterface $webhook, UserInterface $customUser = null)
     {
