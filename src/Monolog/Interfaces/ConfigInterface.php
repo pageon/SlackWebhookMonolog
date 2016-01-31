@@ -12,7 +12,7 @@ interface ConfigInterface
     /**
      * The minimum logging level at which this handler will be triggered.
      *
-     * @return bool
+     * @return int
      */
     public function getLevel();
 
