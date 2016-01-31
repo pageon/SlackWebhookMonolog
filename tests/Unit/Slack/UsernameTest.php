@@ -1,0 +1,68 @@
+<?php
+
+namespace Pageon\SlackMonolog\Tests;
+
+use PHPUnit_Framework_TestCase;
+use Pageon\SlackMonolog\Slack\Username;
+
+class UsernameTest extends PHPUnit_Framework_TestCase
+{
+    /**
+     * Does the class implements the interface.
+     */
+    public function testInterface()
+    {
+        $this->assertInstanceOf(
+            'Pageon\SlackMonolog\Slack\Interfaces\UsernameInterface',
+            new Username('Pageon'),
+            "The class doesn't implement the UsernameInterface"
+        );
+    }
+
+    /**
+     * Do we actually get the username back we put into the class?
+     */
+    public function testGetUsername()
+    {
+        $usernameString = 'Pageon';
+        $username = new Username($usernameString);
+        $this->assertEquals($usernameString, $username->getUsername(), 'The username is not returned correctly');
+    }
+
+    /**
+     * This will test the _toString implementation.
+     */
+    public function testToString()
+    {
+        $usernameString = 'Pageon';
+        $username = new Username($usernameString);
+        $this->assertEquals(
+            $usernameString,
+            $username,
+            'When the Username is cast to string it should return the username'
+        );
+    }
+
+    /**
+     * This will test if the whitespace around the username is trimmed.
+     */
+    public function testWhiteSpaceAroundUsername()
+    {
+        $usernameString = 'Pageon';
+        $this->assertEquals(
+            $usernameString,
+            new Username($usernameString . ' '),
+            'Whitespace after the username should be trimmed'
+        );
+        $this->assertEquals(
+            $usernameString,
+            new Username($usernameString . ' '),
+            'Whitespace after the username should be trimmed'
+        );
+        $this->assertEquals(
+            $usernameString,
+            new Username(' ' . $usernameString . ' '),
+            'Whitespace before and after the username should be trimmed'
+        );
+    }
+}
