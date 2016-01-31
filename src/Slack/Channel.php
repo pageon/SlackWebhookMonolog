@@ -33,6 +33,14 @@ class Channel implements ChannelInterface
     {
         $name = trim($name);
 
+        if (strlen($name) === 0) {
+            throw new InvalidChannelException(
+                'The name should start with "#" for a channel or "@" for an account.
+                    The name that was provided did not start with either of those.',
+                400
+            );
+        }
+
         switch ($name[0]) {
             case '#':
                 // names should be lowercase so we just enforce this without further validation

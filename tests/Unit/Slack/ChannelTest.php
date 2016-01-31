@@ -150,6 +150,15 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     /**
      * This will test if there is an error when the channel name that is passed is not a channel or an channel.
      */
+    public function testChannelTypeChannelNameCannotBeCompletelyEmpty()
+    {
+        $this->setExpectedException('Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidChannelException', '', 400);
+        new Channel('');
+    }
+
+    /**
+     * This will test if there is an error when the channel name that is passed is not a channel or an channel.
+     */
     public function testChannelTypeChannelNameCannotBeLongerThan21Chars()
     {
         $this->setExpectedException('Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidChannelException', '', 400);
