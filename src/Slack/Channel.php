@@ -46,31 +46,16 @@ class Channel implements ChannelInterface
 
         switch ($name[0]) {
             case '#':
-                // check if the username matches the requirements from slack
-                $validationRegex = '_^#[\w-]{1,21}$_';
-                if (!preg_match($validationRegex, $name)) {
-                    throw new InvalidChannelException(
-                        'Channel names must be all lowercase.
-                         They cannot be longer than 21 characters and can only contain letters, numbers, hyphens, and underscores.',
-                        400
-                    );
+                if ($this->isValidName($name, '_^#[\w-]{1,21}$_')) {
+                    $this->name = $name;
                 }
-
-                $this->name = $name;
 
                 return;
             case '@':
                 // check if the username matches the requirements from slack
-                $validationRegex = '_^@[\w-.]{1,21}$_';
-                if (!preg_match($validationRegex, $name)) {
-                    throw new InvalidChannelException(
-                        'Usernames must be all lowercase.
-                         They cannot be longer than 21 characters and can only contain letters, numbers, periods, hyphens, and underscores.',
-                        400
-                    );
+                if ($this->isValidName($name, '_^@[\w-.]{1,21}$_')) {
+                    $this->name = $name;
                 }
-
-                $this->name = $name;
 
                 return;
             default:
@@ -96,5 +81,26 @@ class Channel implements ChannelInterface
     public function __toString()
     {
         return $this->getChannel();
+    }
+
+    /**
+     * Check if the name is valid against a regular expression.
+     *
+     * @param string $name
+     * @param string $validationRegex
+     *
+     * @return bool
+     */
+    private function isValidName($name, $validationRegex)
+    {
+        if (!preg_match($validationRegex, $name)) {
+            throw new InvalidChannelException(
+                'Channel names must be all lowercase.
+                 They cannot be longer than 21 characters and can only contain letters, numbers, hyphens, and underscores.',
+                400
+            );
+        }
+
+        return true;
     }
 }
