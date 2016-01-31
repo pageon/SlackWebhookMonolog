@@ -74,4 +74,13 @@ class ConfigTest extends PHPUnit_Framework_TestCase
             'The default bubble setting should match the one in the constructor'
         );
     }
+
+    public function testConnectionTimeout()
+    {
+        $this->assertInternalType(
+            'float',
+            (new Config(Logger::DEBUG))->getConnectionTimeout(),
+            'Invalid connection timeout'
+        );
+    }
 }

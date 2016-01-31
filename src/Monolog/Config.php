@@ -29,6 +29,11 @@ class Config implements ConfigInterface
     private $connectionString = 'ssl://slack.com:443';
 
     /**
+     * @var float How long the connection can be open before it times out.
+     */
+    private $connectionTimeout;
+
+    /**
      * Config constructor.
      *
      * @param int $level
@@ -38,6 +43,7 @@ class Config implements ConfigInterface
     {
         $this->setLevel($level);
         $this->doesBubble = $doesBubble;
+        $this->connectionTimeout = (float) ini_get('default_socket_timeout');
     }
 
     /**
@@ -86,5 +92,13 @@ class Config implements ConfigInterface
     public function getConnectionString()
     {
         return $this->connectionString;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getConnectionTimeout()
+    {
+        return $this->connectionTimeout;
     }
 }

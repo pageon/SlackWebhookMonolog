@@ -29,4 +29,11 @@ interface ConfigInterface
      * @return string
      */
     public function getConnectionString();
+
+    /**
+     * Returns the maximum time the connection can be open before it times out.
+     *
+     * @return float
+     */
+    public function getConnectionTimeout();
 }
