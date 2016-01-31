@@ -41,11 +41,11 @@ class Channel implements ChannelInterface
             );
         }
 
+        // names should be lowercase so we just enforce this without further validation
+        $name = mb_strtolower($name, 'UTF8');
+
         switch ($name[0]) {
             case '#':
-                // names should be lowercase so we just enforce this without further validation
-                $name = mb_strtolower($name, 'UTF8');
-
                 // check if the username matches the requirements from slack
                 $validationRegex = '_^#[\w-]{1,21}$_';
                 if (!preg_match($validationRegex, $name)) {
@@ -60,9 +60,6 @@ class Channel implements ChannelInterface
 
                 return;
             case '@':
-                // names should be lowercase so we just enforce this without further validation
-                $name = mb_strtolower($name, 'UTF8');
-
                 // check if the username matches the requirements from slack
                 $validationRegex = '_^@[\w-.]{1,21}$_';
                 if (!preg_match($validationRegex, $name)) {
