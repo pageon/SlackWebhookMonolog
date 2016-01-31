@@ -1,6 +1,6 @@
 <?php
 
-namespace Pageon\SlackWebhookMonolog\Tests;
+namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
 use Pageon\SlackWebhookMonolog\Slack\Config;
 use Pageon\SlackWebhookMonolog\Slack\User;

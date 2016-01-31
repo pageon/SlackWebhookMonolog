@@ -1,6 +1,6 @@
 <?php
 
-namespace Pageon\SlackWebhookMonolog\Tests;
+namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
 use PHPUnit_Framework_TestCase;
 use Pageon\SlackWebhookMonolog\Slack\UrlIcon;
