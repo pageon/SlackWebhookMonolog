@@ -1,9 +1,10 @@
 {
   "name": "pageon/slack-monolog",
-  "description": "A monolog handler for slack integration",
+  "description": "A monolog handler for slack integration using webhooks",
   "keywords": [
     "monolog",
-    "slack"
+    "slack",
+    "webhook"
   ],
   "version": "0.1.0",
   "minimum-stability": "stable",
