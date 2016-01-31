@@ -43,7 +43,14 @@ class EmojiIcon implements IconInterface
 
         $emojiValidationRegex = '_^:[\w-+]+:$_iuS';
         if (!preg_match($emojiValidationRegex, $emoji)) {
-            throw new InvalidEmojiException(sprintf('The emoji: "%s" is not a valid emoji.', $emoji), 400);
+            throw new InvalidEmojiException(
+                sprintf(
+                    'The emoji: "%s" is not a valid emoji.
+                     An emoji should always be a string starting and ending with ":".',
+                    $emoji
+                ),
+                400
+            );
         }
         $this->emoji = $emoji;
 
