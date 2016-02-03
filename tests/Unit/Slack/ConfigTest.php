@@ -5,8 +5,8 @@ namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 use Pageon\SlackWebhookMonolog\Slack\Config;
 use Pageon\SlackWebhookMonolog\Slack\User;
 use Pageon\SlackWebhookMonolog\Slack\Username;
-use PHPUnit_Framework_TestCase;
 use Pageon\SlackWebhookMonolog\Slack\Webhook;
+use PHPUnit_Framework_TestCase;
 
 class ConfigTest extends PHPUnit_Framework_TestCase
 {

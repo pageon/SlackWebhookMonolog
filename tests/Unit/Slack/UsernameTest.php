@@ -2,8 +2,8 @@
 
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
-use PHPUnit_Framework_TestCase;
 use Pageon\SlackWebhookMonolog\Slack\Username;
+use PHPUnit_Framework_TestCase;
 
 class UsernameTest extends PHPUnit_Framework_TestCase
 {
@@ -51,17 +51,17 @@ class UsernameTest extends PHPUnit_Framework_TestCase
         $usernameString = 'Pageon';
         $this->assertEquals(
             $usernameString,
-            new Username($usernameString . ' '),
+            new Username($usernameString.' '),
             'Whitespace after the username should be trimmed'
         );
         $this->assertEquals(
             $usernameString,
-            new Username($usernameString . ' '),
+            new Username($usernameString.' '),
             'Whitespace after the username should be trimmed'
         );
         $this->assertEquals(
             $usernameString,
-            new Username(' ' . $usernameString . ' '),
+            new Username(' '.$usernameString.' '),
             'Whitespace before and after the username should be trimmed'
         );
     }

@@ -28,7 +28,7 @@ class Webhook implements WebhookInterface
     private $customChannel = null;
 
     /**
-     * @param string $url The webhook url provided by slack.
+     * @param string                $url           The webhook url provided by slack.
      * @param ChannelInterface|null $customChannel if no channel is provided the default will be used from the config in slack.
      */
     public function __construct($url, ChannelInterface $customChannel = null)

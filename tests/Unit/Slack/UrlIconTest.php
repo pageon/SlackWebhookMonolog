@@ -2,8 +2,8 @@
 
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
-use PHPUnit_Framework_TestCase;
 use Pageon\SlackWebhookMonolog\Slack\UrlIcon;
+use PHPUnit_Framework_TestCase;
 
 class UrlIconTest extends PHPUnit_Framework_TestCase
 {
@@ -54,11 +54,11 @@ class UrlIconTest extends PHPUnit_Framework_TestCase
     public function testWhiteSpaceAroundUrl()
     {
         $url = 'http://placehold.it/512x512.png';
-        $this->assertEquals($url, new UrlIcon(' ' . $url), 'Whitespace before the url should be trimmed');
-        $this->assertEquals($url, new UrlIcon($url . ' '), 'Whitespace after the url should be trimmed');
+        $this->assertEquals($url, new UrlIcon(' '.$url), 'Whitespace before the url should be trimmed');
+        $this->assertEquals($url, new UrlIcon($url.' '), 'Whitespace after the url should be trimmed');
         $this->assertEquals(
             $url,
-            new UrlIcon(' ' . $url . ' '),
+            new UrlIcon(' '.$url.' '),
             'Whitespace before and after the url should be trimmed'
         );
     }

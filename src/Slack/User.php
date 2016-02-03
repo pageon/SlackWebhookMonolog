@@ -28,7 +28,7 @@ class User implements UserInterface
      * If they are not provided slack will fallback to the default settings from the configuration in slack.
      *
      * @param UsernameInterface|null $username
-     * @param IconInterface|null $icon
+     * @param IconInterface|null     $icon
      */
     public function __construct(UsernameInterface $username = null, IconInterface $icon = null)
     {

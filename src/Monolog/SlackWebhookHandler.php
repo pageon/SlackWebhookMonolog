@@ -27,7 +27,7 @@ class SlackWebhookHandler extends SocketHandler
     /**
      * SlackWebhookHandler constructor.
      *
-     * @param SlackConfig $slackConfig
+     * @param SlackConfig   $slackConfig
      * @param MonologConfig $monologConfig
      *
      * @throws MissingExtensionException When the OpenSSL PHP extension is not activated
@@ -51,7 +51,7 @@ class SlackWebhookHandler extends SocketHandler
     /**
      * {@inheritdoc}
      *
-     * @param  array  $record
+     * @param array $record
      *
      * @return string
      */
@@ -59,13 +59,13 @@ class SlackWebhookHandler extends SocketHandler
     {
         $content = $this->buildContent($record);
 
-        return $this->buildHeader($content) . $content;
+        return $this->buildHeader($content).$content;
     }
 
     /**
      * Builds the body of API call.
      *
-     * @param  array  $record
+     * @param array $record
      *
      * @return string
      */
@@ -79,7 +79,7 @@ class SlackWebhookHandler extends SocketHandler
     /**
      * Prepares content data.
      *
-     * @param  array $record
+     * @param array $record
      *
      * @return array
      */
@@ -97,16 +97,16 @@ class SlackWebhookHandler extends SocketHandler
     /**
      * Builds the header of the API Call.
      *
-     * @param  string $content
+     * @param string $content
      *
      * @return string
      */
     private function buildHeader($content)
     {
-        $header = 'POST ' . $this->slackConfig->getWebhook() . " HTTP/1.1\r\n";
+        $header = 'POST '.$this->slackConfig->getWebhook()." HTTP/1.1\r\n";
         $header .= "Host: slack.com\r\n";
         $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $header .= 'Content-Length: ' . strlen($content) . "\r\n";
+        $header .= 'Content-Length: '.strlen($content)."\r\n";
         $header .= "\r\n";
 
         return $header;

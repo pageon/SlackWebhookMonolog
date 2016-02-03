@@ -36,7 +36,7 @@ class Config implements ConfigInterface
     /**
      * Config constructor.
      *
-     * @param int $level
+     * @param int  $level
      * @param bool $doesBubble
      */
     public function __construct($level, $doesBubble = true)
