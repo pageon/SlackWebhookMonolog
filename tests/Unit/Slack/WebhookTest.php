@@ -3,8 +3,8 @@
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
 use Pageon\SlackWebhookMonolog\Slack\Channel;
-use PHPUnit_Framework_TestCase;
 use Pageon\SlackWebhookMonolog\Slack\Webhook;
+use PHPUnit_Framework_TestCase;
 
 class WebhookTest extends PHPUnit_Framework_TestCase
 {
@@ -85,11 +85,11 @@ class WebhookTest extends PHPUnit_Framework_TestCase
     public function testWhiteSpaceAroundUrl()
     {
         $url = 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX';
-        $this->assertEquals($url, new Webhook(' ' . $url), 'Whitespace before the url should be trimmed');
-        $this->assertEquals($url, new Webhook($url . ' '), 'Whitespace after the url should be trimmed');
+        $this->assertEquals($url, new Webhook(' '.$url), 'Whitespace before the url should be trimmed');
+        $this->assertEquals($url, new Webhook($url.' '), 'Whitespace after the url should be trimmed');
         $this->assertEquals(
             $url,
-            new Webhook(' ' . $url . ' '),
+            new Webhook(' '.$url.' '),
             'Whitespace before and after the url should be trimmed'
         );
     }

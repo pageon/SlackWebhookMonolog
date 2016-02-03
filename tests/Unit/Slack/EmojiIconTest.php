@@ -2,8 +2,8 @@
 
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
-use PHPUnit_Framework_TestCase;
 use Pageon\SlackWebhookMonolog\Slack\EmojiIcon;
+use PHPUnit_Framework_TestCase;
 
 class EmojiIconTest extends PHPUnit_Framework_TestCase
 {
@@ -55,11 +55,11 @@ class EmojiIconTest extends PHPUnit_Framework_TestCase
     public function testWhiteSpaceAroundUrl()
     {
         $emoji = ':kissing_closed_eyes+1:';
-        $this->assertEquals($emoji, new EmojiIcon(' ' . $emoji), 'Whitespace before the emoji should be trimmed');
-        $this->assertEquals($emoji, new EmojiIcon($emoji . ' '), 'Whitespace after the emoji should be trimmed');
+        $this->assertEquals($emoji, new EmojiIcon(' '.$emoji), 'Whitespace before the emoji should be trimmed');
+        $this->assertEquals($emoji, new EmojiIcon($emoji.' '), 'Whitespace after the emoji should be trimmed');
         $this->assertEquals(
             $emoji,
-            new EmojiIcon(' ' . $emoji . ' '),
+            new EmojiIcon(' '.$emoji.' '),
             'Whitespace before and after the emoji should be trimmed'
         );
     }

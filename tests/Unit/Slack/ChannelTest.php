@@ -51,17 +51,17 @@ class ChannelTest extends PHPUnit_Framework_TestCase
         $channelName = '#monolog';
         $this->assertEquals(
             $channelName,
-            new Channel(' ' . $channelName),
+            new Channel(' '.$channelName),
             'Whitespace before the channel name should be trimmed'
         );
         $this->assertEquals(
             $channelName,
-            new Channel($channelName . ' '),
+            new Channel($channelName.' '),
             'Whitespace after the channel name should be trimmed'
         );
         $this->assertEquals(
             $channelName,
-            new Channel(' ' . $channelName . ' '),
+            new Channel(' '.$channelName.' '),
             'Whitespace before and after the channel name should be trimmed'
         );
     }
