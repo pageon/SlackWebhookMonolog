@@ -1,3 +1,11 @@
+0.1.2 (2016-02-03)
+--
+Improvements:
+
+* Lower the required version of monolog so we can use this class with Fork CMS
+
+Bugfixes:
+
 0.1.1 (2016-01-31)
 --
 Improvements:
