@@ -6,7 +6,6 @@
     "slack",
     "webhook"
   ],
-  "version": "0.1.2",
   "minimum-stability": "stable",
   "license": "GPL3",
   "authors": [
