@@ -22,18 +22,4 @@ interface ConfigInterface
      * @return bool
      */
     public function doesBubble();
-
-    /**
-     * Returns the connection string.
-     *
-     * @return string
-     */
-    public function getConnectionString();
-
-    /**
-     * Returns the maximum time the connection can be open before it times out.
-     *
-     * @return float
-     */
-    public function getConnectionTimeout();
 }

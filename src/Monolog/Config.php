@@ -24,11 +24,6 @@ class Config implements ConfigInterface
     private $doesBubble;
 
     /**
-     * @var string The connection string for the socket.
-     */
-    private $connectionString = 'ssl://slack.com:443';
-
-    /**
      * @var float How long the connection can be open before it times out.
      */
     private $connectionTimeout;
@@ -84,21 +79,5 @@ class Config implements ConfigInterface
     public function doesBubble()
     {
         return $this->doesBubble;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConnectionString()
-    {
-        return $this->connectionString;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConnectionTimeout()
-    {
-        return $this->connectionTimeout;
     }
 }

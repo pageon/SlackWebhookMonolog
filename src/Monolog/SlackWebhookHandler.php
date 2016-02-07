@@ -2,17 +2,20 @@
 
 namespace Pageon\SlackWebhookMonolog\Monolog;
 
+use Monolog\Handler\AbstractHandler;
+use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\MissingExtensionException;
 use Monolog\Handler\SocketHandler;
 use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ConfigInterface as MonologConfig;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface as SlackConfig;
+use Monolog\Handler\Curl;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>
  *
  * @since 0.1.0
  */
-class SlackWebhookHandler extends SocketHandler
+class SlackWebhookHandler extends AbstractProcessingHandler
 {
     /**
      * @var SlackConfig
@@ -30,60 +33,43 @@ class SlackWebhookHandler extends SocketHandler
      * @param SlackConfig $slackConfig
      * @param MonologConfig $monologConfig
      *
-     * @throws MissingExtensionException When the OpenSSL PHP extension is not activated
+     * @throws MissingExtensionException When the curl extension is not activated
      */
     public function __construct(SlackConfig $slackConfig, MonologConfig $monologConfig)
     {
-        if (!extension_loaded('openssl')) {
-            throw new MissingExtensionException('The OpenSSL PHP extension is required to use the SlackHandler');
+        if (!in_array('curl', get_loaded_extensions())) {
+            throw new MissingExtensionException('The curl extension is required to use the SlackHandler');
         }
 
         $this->slackConfig = $slackConfig;
         $this->monologConfig = $monologConfig;
 
-        parent::__construct(
-            $monologConfig->getConnectionString(),
-            $monologConfig->getLevel(),
-            $monologConfig->doesBubble()
-        );
+        parent::__construct($monologConfig->getLevel(), $monologConfig->doesBubble());
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @param  array  $record
-     *
-     * @return string
      */
-    protected function generateDataStream($record)
+    public function write(array $record)
     {
-        $content = $this->buildContent($record);
 
-        return $this->buildHeader($content) . $content;
-    }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->slackConfig->getWebhook());
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->prepareContentData($record));
 
-    /**
-     * Builds the body of API call.
-     *
-     * @param  array  $record
-     *
-     * @return string
-     */
-    private function buildContent($record)
-    {
-        $dataArray = $this->prepareContentData($record);
-
-        return http_build_query($dataArray);
+        Curl\Util::execute($ch);
     }
 
     /**
      * Prepares content data.
      *
-     * @param  array $record
+     * @param array $record
      *
      * @return array
      */
-    protected function prepareContentData($record)
+    private function prepareContentData($record)
     {
         $payload = [
             'text' => $record['message'],
@@ -92,35 +78,5 @@ class SlackWebhookHandler extends SocketHandler
         return [
             'payload' => json_encode($payload),
         ];
-    }
-
-    /**
-     * Builds the header of the API Call.
-     *
-     * @param  string $content
-     *
-     * @return string
-     */
-    private function buildHeader($content)
-    {
-        $header = 'POST ' . $this->slackConfig->getWebhook() . " HTTP/1.1\r\n";
-        $header .= "Host: slack.com\r\n";
-        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $header .= 'Content-Length: ' . strlen($content) . "\r\n";
-        $header .= "\r\n";
-
-        return $header;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param array $record
-     */
-    protected function write(array $record)
-    {
-        parent::write($record);
-
-        $this->closeSocket();
     }
 }
