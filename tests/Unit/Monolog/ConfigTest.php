@@ -21,19 +21,6 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test if we have the correct connection string.
-     */
-    public function testConnectionString()
-    {
-        $config = new Config(Logger::DEBUG);
-        $this->assertEquals(
-            'ssl://slack.com:443',
-            $config->getConnectionString(),
-            'The connection string needs to be "ssl://slack.com:443"'
-        );
-    }
-
-    /**
      * Test if we have the correct level.
      */
     public function testLevel()
@@ -72,15 +59,6 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(
             (new Config(Logger::DEBUG, false))->doesBubble(),
             'The default bubble setting should match the one in the constructor'
-        );
-    }
-
-    public function testConnectionTimeout()
-    {
-        $this->assertInternalType(
-            'float',
-            (new Config(Logger::DEBUG))->getConnectionTimeout(),
-            'Invalid connection timeout'
         );
     }
 }

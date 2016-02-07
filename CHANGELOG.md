@@ -1,3 +1,12 @@
+0.2.1 (2016-02-07)
+--
+Improvements:
+
+Bugfixes:
+
+* Updated the tests to reflect the changes from version 0.2.0
+
+
 0.2.0 (2016-02-07)
 --
 Improvements:

@@ -52,7 +52,6 @@ class SlackWebhookHandler extends AbstractProcessingHandler
      */
     public function write(array $record)
     {
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->slackConfig->getWebhook());
         curl_setopt($ch, CURLOPT_POST, true);
