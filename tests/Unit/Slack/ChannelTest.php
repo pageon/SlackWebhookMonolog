@@ -114,9 +114,9 @@ class ChannelTest extends PHPUnit_Framework_TestCase
     /**
      * This will test if there is an error when the channel name that is passed is not a channel or an account.
      */
-    public function testAccountTypeChannelNameCannotBe21Chars()
+    public function testAccountTypeChannelNameCanBe21Chars()
     {
-        $username = '@azertyuiopqsdfghj1_.-';
+        $username = '@azertyuiopqsdfghj1_--';
         $this->assertEquals($username, new Channel($username));
     }
 
