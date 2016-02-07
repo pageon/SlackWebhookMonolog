@@ -110,17 +110,24 @@ class Error implements ErrorInterface
         $this->parameters = $parameters;
 
         // make sure we have at least the POST, GET, COOKIE and SESSION data
-        if (!isset($this->parameters['_POST']) && !empty($_POST)) {
-            $this->parameters['_POST'] = $_POST;
+        $this->addParameterFallback('_POST', $_POST);
+        $this->addParameterFallback('_GET', $_GET);
+        $this->addParameterFallback('_COOKIE', $_COOKIE);
+        if (isset($_SESSION)) {
+            $this->addParameterFallback('_SESSION', $_SESSION);
         }
-        if (!isset($this->parameters['_GET']) && !empty($_GET)) {
-            $this->parameters['_GET'] = $_GET;
-        }
-        if (!isset($this->parameters['_COOKIE']) && !empty($_COOKIE)) {
-            $this->parameters['_COOKIE'] = $_COOKIE;
-        }
-        if (!isset($this->parameters['_SESSION']) && !empty($_SESSION)) {
-            $this->parameters['_SESSION'] = $_SESSION;
+    }
+
+    /**
+     * This will add fallback data to the parameters if the key is not set
+     *
+     * @param string $name
+     * @param mixed $fallbackData
+     */
+    private function addParameterFallback($name, $fallbackData = null)
+    {
+        if (!isset($this->parameters[$name]) && !empty($fallbackData)) {
+            $this->parameters[$name] = $fallbackData;
         }
     }
 
