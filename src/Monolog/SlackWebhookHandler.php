@@ -28,6 +28,11 @@ class SlackWebhookHandler extends AbstractProcessingHandler
     private $monologConfig;
 
     /**
+     * @var Curl\Util
+     */
+    private $curlUtil;
+
+    /**
      * SlackWebhookHandler constructor.
      *
      * @param SlackConfig $slackConfig
@@ -35,16 +40,17 @@ class SlackWebhookHandler extends AbstractProcessingHandler
      *
      * @throws MissingExtensionException When the curl extension is not activated
      */
-    public function __construct(SlackConfig $slackConfig, MonologConfig $monologConfig)
+    public function __construct(SlackConfig $slackConfig, MonologConfig $monologConfig, Curl\Util $curlUtil)
     {
         if (!in_array('curl', get_loaded_extensions())) {
             throw new MissingExtensionException('The curl extension is required to use the SlackHandler');
         }
 
+        parent::__construct($monologConfig->getLevel(), $monologConfig->doesBubble());
+
         $this->slackConfig = $slackConfig;
         $this->monologConfig = $monologConfig;
-
-        parent::__construct($monologConfig->getLevel(), $monologConfig->doesBubble());
+        $this->curlUtil = $curlUtil;
     }
 
     /**
@@ -52,13 +58,16 @@ class SlackWebhookHandler extends AbstractProcessingHandler
      */
     public function write(array $record)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->slackConfig->getWebhook());
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->prepareContentData($record));
+        $curlUtil = $this->curlUtil;
 
-        Curl\Util::execute($ch);
+        $curlSession = curl_init();
+        curl_setopt($curlSession, CURLOPT_URL, $this->slackConfig->getWebhook());
+        curl_setopt($curlSession, CURLOPT_POST, true);
+        curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curlSession, CURLOPT_POSTFIELDS, $this->prepareContentData($record));
+
+        // we return this because our mock will return the curl session
+        return $curlUtil::execute($curlSession);
     }
 
     /**
