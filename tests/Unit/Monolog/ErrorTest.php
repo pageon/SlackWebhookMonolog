@@ -1,6 +1,6 @@
 <?php
 
-namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
+namespace Pageon\SlackChannelMonolog\Tests\Unit\Monolog;
 
 use Pageon\SlackWebhookMonolog\Monolog\Error;
 use PHPUnit_Framework_TestCase;
