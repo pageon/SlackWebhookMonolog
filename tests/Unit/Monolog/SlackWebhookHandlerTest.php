@@ -2,6 +2,8 @@
 
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Monolog;
 
+require_once 'Mocks/CurlUtil.php';
+
 use Monolog\Logger;
 use Pageon\SlackChannelMonolog\Tests\Unit\Monolog\Mocks\CurlUtil;
 use Pageon\SlackWebhookMonolog\Monolog\Config as MonologConfig;
