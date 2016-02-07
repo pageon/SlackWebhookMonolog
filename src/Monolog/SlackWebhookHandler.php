@@ -9,6 +9,7 @@ use Monolog\Handler\SocketHandler;
 use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ConfigInterface as MonologConfig;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface as SlackConfig;
 use Monolog\Handler\Curl;
+use Pageon\SlackWebhookMonolog\Slack\Payload;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>
@@ -64,7 +65,7 @@ class SlackWebhookHandler extends AbstractProcessingHandler
         curl_setopt($curlSession, CURLOPT_URL, $this->slackConfig->getWebhook());
         curl_setopt($curlSession, CURLOPT_POST, true);
         curl_setopt($curlSession, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlSession, CURLOPT_POSTFIELDS, $this->prepareContentData($record));
+        curl_setopt($curlSession, CURLOPT_POSTFIELDS, $this->getPayload($record));
 
         // we return this because our mock will return the curl session
         return $curlUtil::execute($curlSession);
@@ -77,14 +78,12 @@ class SlackWebhookHandler extends AbstractProcessingHandler
      *
      * @return array
      */
-    private function prepareContentData($record)
+    private function getPayload($record)
     {
-        $payload = [
-            'text' => $record['message'],
-        ];
-
         return [
-            'payload' => json_encode($payload),
+            'payload' => json_encode(
+                new Payload($record)
+            ),
         ];
     }
 }
