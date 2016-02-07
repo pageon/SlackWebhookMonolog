@@ -1,3 +1,15 @@
+0.3.0 (xxxx-xx-xx)
+--
+Improvements:
+
+* Refactor the code to set the channel name
+* Added an error class containing extra information about what happened
+
+Bugfixes:
+
+* Fully remove all traces of the socket implementation
+
+
 0.2.1 (2016-02-07)
 --
 Improvements:
