@@ -1,6 +1,6 @@
 <?php
 
-namespace Pageon\SlackChannelMonolog\tests\Unit\Monolog\Mocks;
+namespace Pageon\SlackChannelMonolog\Tests\Unit\Monolog\Mocks;
 
 use Monolog\Handler\Curl\Util;
 

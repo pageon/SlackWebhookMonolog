@@ -2,10 +2,8 @@
 
 namespace Pageon\SlackWebhookMonolog\Monolog;
 
-use Monolog\Handler\AbstractHandler;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\MissingExtensionException;
-use Monolog\Handler\SocketHandler;
 use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ConfigInterface as MonologConfig;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface as SlackConfig;
 use Monolog\Handler\Curl;
@@ -43,10 +41,6 @@ class SlackWebhookHandler extends AbstractProcessingHandler
      */
     public function __construct(SlackConfig $slackConfig, MonologConfig $monologConfig, Curl\Util $curlUtil)
     {
-        if (!in_array('curl', get_loaded_extensions())) {
-            throw new MissingExtensionException('The curl extension is required to use the SlackHandler');
-        }
-
         parent::__construct($monologConfig->getLevel(), $monologConfig->doesBubble());
 
         $this->slackConfig = $slackConfig;
