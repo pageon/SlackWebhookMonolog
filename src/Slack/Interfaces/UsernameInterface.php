@@ -2,12 +2,14 @@
 
 namespace Pageon\SlackWebhookMonolog\Slack\Interfaces;
 
+use JsonSerializable;
+
 /**
  * @author Jelmer Prins <jelmer@pageon.be>
  *
  * @since 0.1.0
  */
-interface UsernameInterface
+interface UsernameInterface extends JsonSerializable
 {
     /**
      * Returns the username.

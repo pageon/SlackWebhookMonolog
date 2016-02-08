@@ -9,7 +9,7 @@ use Pageon\SlackWebhookMonolog\Slack\Interfaces\UsernameInterface;
  *
  * @since 0.1.0
  */
-class Username implements UsernameInterface
+class Username extends SerializeToString implements UsernameInterface
 {
     /**
      * @var string

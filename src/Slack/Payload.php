@@ -77,7 +77,7 @@ class Payload implements JsonSerializable
             return;
         }
 
-        $this->payload['channel'] = (string) $this->slackConfig->getWebhook()->getCustomChannel();
+        $this->payload['channel'] = $this->slackConfig->getWebhook()->getCustomChannel();
     }
 
     /**

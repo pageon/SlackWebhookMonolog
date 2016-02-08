@@ -10,7 +10,7 @@ use Pageon\SlackWebhookMonolog\Slack\Interfaces\IconInterface;
  *
  * @since 0.1.0
  */
-class UrlIcon implements IconInterface
+class UrlIcon extends SerializeToString implements IconInterface
 {
     /**
      * @var string

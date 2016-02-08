@@ -10,7 +10,7 @@ use Pageon\SlackWebhookMonolog\Slack\Interfaces\ChannelInterface;
  *
  * @since 0.1.0
  */
-class Channel implements ChannelInterface
+class Channel extends SerializeToString implements ChannelInterface
 {
     private $name;
 

@@ -2,8 +2,6 @@
 
 namespace Pageon\SlackWebhookMonolog\Slack\Interfaces;
 
-use Pageon\SlackWebhookMonolog\Slack\Channel;
-
 /**
  * @author Jelmer Prins <jelmer@pageon.be>
  *
