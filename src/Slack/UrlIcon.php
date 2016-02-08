@@ -66,4 +66,12 @@ class UrlIcon extends SerializeToString implements IconInterface
     {
         return $this->getIcon();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getType()
+    {
+        return 'url';
+    }
 }

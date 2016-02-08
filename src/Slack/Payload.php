@@ -61,11 +61,39 @@ class Payload implements JsonSerializable
 
         $this->setMessage();
 
-        if ($this->slackConfig === null) {
+        if ($this->slackConfig !== null) {
+            $this->generatePayloadForSlackConfig();
+        }
+    }
+
+    /**
+     * Generate the payload for the slack config
+     */
+    private function generatePayloadForSlackConfig()
+    {
+        $this->setChannel();
+
+        if ($this->slackConfig->hasCustomUser()) {
+            $this->generatePayloadForCustomuser();
+        }
+    }
+
+    private function generatePayloadForCustomuser()
+    {
+        $this->setIcon();
+    }
+
+    /**
+     * Set a custom icon if available.
+     */
+    private function setIcon()
+    {
+        if (!$this->slackConfig->getCustomUser()->hasIcon()) {
             return;
         }
 
-        $this->setChannel();
+        $iconType = 'icon_' . $this->slackConfig->getCustomUser()->getIcon()->getType();
+        $this->payload[$iconType] = $this->slackConfig->getCustomUser()->getIcon();
     }
 
     /**

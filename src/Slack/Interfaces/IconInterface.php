@@ -19,6 +19,13 @@ interface IconInterface extends JsonSerializable
     public function getIcon();
 
     /**
+     * Returns the name of the type i.e. "emoji".
+     *
+     * @return string
+     */
+    public function getType();
+
+    /**
      * When the class is cast to a string it should return the name of the icon.
      *
      * @return string

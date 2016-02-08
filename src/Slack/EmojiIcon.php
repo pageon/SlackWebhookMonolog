@@ -72,4 +72,12 @@ class EmojiIcon extends SerializeToString implements IconInterface
     {
         return $this->getIcon();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getType()
+    {
+        return 'emoji';
+    }
 }

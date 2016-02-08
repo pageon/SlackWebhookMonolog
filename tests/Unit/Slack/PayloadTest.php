@@ -7,6 +7,7 @@ use Pageon\SlackWebhookMonolog\Slack\Channel;
 use Pageon\SlackWebhookMonolog\Slack\Config;
 use Pageon\SlackWebhookMonolog\Slack\EmojiIcon;
 use Pageon\SlackWebhookMonolog\Slack\Payload;
+use Pageon\SlackWebhookMonolog\Slack\UrlIcon;
 use Pageon\SlackWebhookMonolog\Slack\User;
 use Pageon\SlackWebhookMonolog\Slack\Username;
 use Pageon\SlackWebhookMonolog\Slack\Webhook;
@@ -60,7 +61,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
      */
     private function getUrlIconUser()
     {
-        return new User(new Username('ErrorBot'), new EmojiIcon(':alien:'));
+        return new User(new Username('ErrorBot'), new UrlIcon('https://slack.com/img/icons/app-57.png'));
     }
 
     public function testPayloadWithoutErrorContext()
@@ -82,5 +83,23 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $payload = json_encode(new Payload($this->getRecord(true), new Config($this->getWebhook())));
 
         $this->assertContains('"channel":"#general"', $payload);
+    }
+
+    public function testCustomEmojiIcon()
+    {
+        $payload = json_encode(
+            new Payload($this->getRecord(true), new Config($this->getWebhook(), $this->getEmojiIconUser()))
+        );
+
+        $this->assertContains('"icon_emoji":":alien:"', $payload);
+    }
+
+    public function testCustomUrlIcon()
+    {
+        $payload = json_encode(
+            new Payload($this->getRecord(true), new Config($this->getWebhook(), $this->getUrlIconUser()))
+        );
+
+        $this->assertContains('"icon_url":"https:\/\/slack.com\/img\/icons\/app-57.png"', $payload);
     }
 }
