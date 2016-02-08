@@ -75,7 +75,11 @@ class Payload implements JsonSerializable
 
     private function setMessage()
     {
-        $this->payload['text'] = $this->hasErrorData() ? $this->errorData->getMessage() : $this->record['message'];
+        $this->payload['text'] = sprintf(
+            '*%s:* %s',
+            $this->record['level_name'],
+            $this->hasErrorData() ? $this->errorData->getMessage() : $this->record['message']
+        );
     }
 
     /**

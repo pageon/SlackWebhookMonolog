@@ -15,6 +15,17 @@ use PHPUnit_Framework_TestCase;
 class SlackWebhookHandlerTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * Get a dummy record.
+     */
+    private function getRecord()
+    {
+        return json_decode(
+            '{"message":"Test success","context":{},"level":400,"level_name":"ERROR","channel":"pageon","datetime":{"date":"2016-02-08 01:01:36.719769","timezone_type":3,"timezone":"Europe\/Brussels"},"extra":[],"formatted":"[2016-02-08 01:01:36] pageon.ERROR: Test success {\"error\":\"[object] (Pageon\\\\SlackWebhookMonolog\\\\Monolog\\\\Error: {})\"} []\n"}',
+            true
+        );
+    }
+
+    /**
      * Does the class implements the interface.
      */
     public function testInterface()
@@ -43,7 +54,7 @@ class SlackWebhookHandlerTest extends PHPUnit_Framework_TestCase
             new CurlUtil()
         );
 
-        $curlSession = $handler->write(['message' => 'test']);
+        $curlSession = $handler->write($this->getRecord());
         $this->assertInternalType('resource', $curlSession);
 
         $curlSessionInfo = curl_getinfo($curlSession);
