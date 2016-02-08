@@ -4,6 +4,7 @@ namespace Pageon\SlackWebhookMonolog\Slack;
 
 use JsonSerializable;
 use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ErrorInterface;
+use Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface as SlackConfigInterface;
 
 /**
  * Turns the record into a payload for slack.
@@ -34,13 +35,23 @@ class Payload implements JsonSerializable
     private $errorData;
 
     /**
+     * Contains some extra information like channel and user etc that can be used in the payload.
+     *
+     * @var SlackConfigInterface
+     */
+    private $slackConfig;
+
+    /**
      * Payload constructor.
      *
-     * @param $record
+     * @param array $record
+     * @param SlackConfigInterface $slackConfig
      */
-    public function __construct(array $record)
+    public function __construct(array $record, SlackConfigInterface $slackConfig = null)
     {
         $this->record = $record;
+        $this->slackConfig = $slackConfig;
+
         $this->generatePayload();
     }
 

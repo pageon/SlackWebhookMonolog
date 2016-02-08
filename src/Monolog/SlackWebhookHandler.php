@@ -76,7 +76,7 @@ class SlackWebhookHandler extends AbstractProcessingHandler
     {
         return [
             'payload' => json_encode(
-                new Payload($record)
+                new Payload($record, $this->slackConfig)
             ),
         ];
     }

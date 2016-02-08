@@ -4,6 +4,7 @@ Improvements:
 
 * Refactor the code to set the channel name
 * Added an error class containing extra information about what happened
+* Send more information about the error to slack
 
 Bugfixes:
 
