@@ -60,6 +60,24 @@ class Payload implements JsonSerializable
         $this->setErrorData();
 
         $this->setMessage();
+
+        if ($this->slackConfig === null) {
+            return;
+        }
+
+        $this->setChannel();
+    }
+
+    /**
+     * Set a custom channel if available.
+     */
+    private function setChannel()
+    {
+        if (!$this->slackConfig->getWebhook()->hasCustomChannel()) {
+            return;
+        }
+
+        $this->payload['channel'] = (string) $this->slackConfig->getWebhook()->getCustomChannel();
     }
 
     /**

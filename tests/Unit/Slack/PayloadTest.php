@@ -3,7 +3,13 @@
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
 use Pageon\SlackWebhookMonolog\Monolog\Error;
+use Pageon\SlackWebhookMonolog\Slack\Channel;
+use Pageon\SlackWebhookMonolog\Slack\Config;
+use Pageon\SlackWebhookMonolog\Slack\EmojiIcon;
 use Pageon\SlackWebhookMonolog\Slack\Payload;
+use Pageon\SlackWebhookMonolog\Slack\User;
+use Pageon\SlackWebhookMonolog\Slack\Username;
+use Pageon\SlackWebhookMonolog\Slack\Webhook;
 use PHPUnit_Framework_TestCase;
 
 class PayloadTest extends PHPUnit_Framework_TestCase
@@ -30,17 +36,51 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         return $record;
     }
 
+    /**
+     * @return Webhook
+     */
+    private function getWebhook()
+    {
+        return new Webhook(
+            'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX',
+            new Channel('#general')
+        );
+    }
+
+    /**
+     * @return User
+     */
+    private function getEmojiIconUser()
+    {
+        return new User(new Username('ErrorBot'), new EmojiIcon(':alien:'));
+    }
+
+    /**
+     * @return User
+     */
+    private function getUrlIconUser()
+    {
+        return new User(new Username('ErrorBot'), new EmojiIcon(':alien:'));
+    }
+
     public function testPayloadWithoutErrorContext()
     {
         $payload = new Payload($this->getRecord());
 
-        $this->assertEquals('{"text":"*ERROR:* Test success"}', json_encode($payload));
+        $this->assertContains('"text":"*ERROR:* Test success"', json_encode($payload));
     }
 
     public function testPayloadWithErrorContext()
     {
-        $payload = new Payload($this->getRecord(true));
+        $payload = json_encode(new Payload($this->getRecord(true)));
 
-        $this->assertEquals('{"text":"*ERROR:* Test with context"}', json_encode($payload));
+        $this->assertContains('"text":"*ERROR:* Test with context"', $payload);
+    }
+
+    public function testCustomChannel()
+    {
+        $payload = json_encode(new Payload($this->getRecord(true), new Config($this->getWebhook())));
+
+        $this->assertContains('"channel":"#general"', $payload);
     }
 }
