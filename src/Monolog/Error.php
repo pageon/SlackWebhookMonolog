@@ -107,7 +107,7 @@ class Error implements ErrorInterface
      */
     private function setParameters(array $parameters = null)
     {
-        $this->parameters = $parameters;
+        $this->parameters = (array) $parameters;
 
         // make sure we have at least the POST, GET, COOKIE and SESSION data
         $this->addParameterFallback('_POST', $_POST);

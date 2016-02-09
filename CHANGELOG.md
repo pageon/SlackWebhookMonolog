@@ -1,3 +1,11 @@
+0.3.1 (2016-02-09)
+--
+Improvements:
+
+Bugfixes:
+
+* Make sure that the var parameters in the Error class is an array
+
 0.3.0 (2016-02-09)
 --
 Improvements:
