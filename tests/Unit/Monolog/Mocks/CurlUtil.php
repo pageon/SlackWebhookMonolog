@@ -5,7 +5,7 @@ namespace Pageon\SlackChannelMonolog\Tests\Unit\Monolog\Mocks;
 use Monolog\Handler\Curl\Util;
 
 /**
- * Class CurlUtil
+ * Class CurlUtil.
  *
  * @author Jelmer Prins <jelmer@$pageon.be>
  */

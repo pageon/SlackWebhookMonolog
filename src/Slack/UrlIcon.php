@@ -68,7 +68,7 @@ class UrlIcon extends SerializeToString implements IconInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getType()
     {

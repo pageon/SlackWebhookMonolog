@@ -74,7 +74,7 @@ class EmojiIcon extends SerializeToString implements IconInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getType()
     {

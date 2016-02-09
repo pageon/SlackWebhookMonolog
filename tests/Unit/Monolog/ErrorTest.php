@@ -51,7 +51,7 @@ class ErrorTest extends PHPUnit_Framework_TestCase
             [
                 'line' => 1,
                 'file' => __FILE__,
-                'function' => 'unknown'
+                'function' => 'unknown',
             ],
         ];
         $error = new Error('test message', $fallbackTrace[0]['line'], $fallbackTrace[0]['file']);
@@ -63,16 +63,16 @@ class ErrorTest extends PHPUnit_Framework_TestCase
     {
         $parameters = [
             '_POST' => [
-                'test'
+                'test',
             ],
             '_GET' => [
-                'test'
+                'test',
             ],
             '_COOKIE' => [
-                'test'
+                'test',
             ],
             '_SESSION' => [
-                'test'
+                'test',
             ],
         ];
 

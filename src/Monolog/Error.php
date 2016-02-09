@@ -34,7 +34,7 @@ class Error implements ErrorInterface
     /**
      * @var array
      */
-    private $parameters = array();
+    private $parameters = [];
 
     /**
      * Create a new error wrapping the given error context info.
@@ -119,7 +119,7 @@ class Error implements ErrorInterface
     }
 
     /**
-     * This will add fallback data to the parameters if the key is not set
+     * This will add fallback data to the parameters if the key is not set.
      *
      * @param string $name
      * @param mixed $fallbackData
@@ -145,13 +145,13 @@ class Error implements ErrorInterface
     private function setTrace(array $trace = null)
     {
         if ($trace === null) {
-            $trace = array(
-                array(
+            $trace = [
+                [
                     'line' => $this->getLine(),
                     'file' => $this->getFile(),
-                    'function' => 'unknown'
-                )
-            );
+                    'function' => 'unknown',
+                ],
+            ];
         }
         $this->trace = $trace;
     }

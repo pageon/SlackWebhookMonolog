@@ -19,6 +19,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
      * Get a dummy record.
      *
      * @param bool $addErrorContext true if an there needs to be an error in the context.
+     *
      * @return array
      */
     private function getRecord($addErrorContext = false)

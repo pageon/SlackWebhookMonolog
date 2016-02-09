@@ -67,7 +67,7 @@ class Payload implements JsonSerializable
     }
 
     /**
-     * Generate the payload for the slack config
+     * Generate the payload for the slack config.
      */
     private function generatePayloadForSlackConfig()
     {
@@ -153,7 +153,7 @@ class Payload implements JsonSerializable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function jsonSerialize()
     {
