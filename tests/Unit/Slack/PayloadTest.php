@@ -51,9 +51,17 @@ class PayloadTest extends PHPUnit_Framework_TestCase
     /**
      * @return User
      */
+    private function getUserWithUsername()
+    {
+        return new User(new Username('ErrorBot'));
+    }
+
+    /**
+     * @return User
+     */
     private function getEmojiIconUser()
     {
-        return new User(new Username('ErrorBot'), new EmojiIcon(':alien:'));
+        return new User(null, new EmojiIcon(':alien:'));
     }
 
     /**
@@ -61,7 +69,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
      */
     private function getUrlIconUser()
     {
-        return new User(new Username('ErrorBot'), new UrlIcon('https://slack.com/img/icons/app-57.png'));
+        return new User(null, new UrlIcon('https://slack.com/img/icons/app-57.png'));
     }
 
     public function testPayloadWithoutErrorContext()
@@ -83,6 +91,15 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $payload = json_encode(new Payload($this->getRecord(true), new Config($this->getWebhook())));
 
         $this->assertContains('"channel":"#general"', $payload);
+    }
+
+    public function testCustomUsername()
+    {
+        $payload = json_encode(
+            new Payload($this->getRecord(true), new Config($this->getWebhook(), $this->getUserWithUsername()))
+        );
+
+        $this->assertContains('"username":"ErrorBot"', $payload);
     }
 
     public function testCustomEmojiIcon()
