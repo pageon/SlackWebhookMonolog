@@ -1,10 +1,11 @@
-0.3.0 (xxxx-xx-xx)
+0.3.0 (2016-02-09)
 --
 Improvements:
 
 * Refactor the code to set the channel name
 * Added an error class containing extra information about what happened
-* Send more information about the error to slack
+* Implement all the customization options
+* Code style
 
 Bugfixes:
 
