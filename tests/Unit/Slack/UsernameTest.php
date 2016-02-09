@@ -65,4 +65,14 @@ class UsernameTest extends PHPUnit_Framework_TestCase
             'Whitespace before and after the username should be trimmed'
         );
     }
+
+    /**
+     * The return of the jsonSerialize function should match the toString implementation.
+     */
+    public function testJsonSerialize()
+    {
+        $username = new Username('carakas');
+
+        $this->assertEquals((string) $username, $username->jsonSerialize());
+    }
 }

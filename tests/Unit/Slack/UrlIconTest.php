@@ -62,4 +62,14 @@ class UrlIconTest extends PHPUnit_Framework_TestCase
             'Whitespace before and after the url should be trimmed'
         );
     }
+
+    /**
+     * The return of the jsonSerialize function should match the toString implementation.
+     */
+    public function testJsonSerialize()
+    {
+        $icon = new UrlIcon('http://placehold.it/512x512.png');
+
+        $this->assertEquals((string) $icon, $icon->jsonSerialize());
+    }
 }

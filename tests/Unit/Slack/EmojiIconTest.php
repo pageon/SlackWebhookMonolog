@@ -63,4 +63,14 @@ class EmojiIconTest extends PHPUnit_Framework_TestCase
             'Whitespace before and after the emoji should be trimmed'
         );
     }
+
+    /**
+     * The return of the jsonSerialize function should match the toString implementation.
+     */
+    public function testJsonSerialize()
+    {
+        $icon = new EmojiIcon(':kissing_closed_eyes+1:');
+
+        $this->assertEquals((string) $icon, $icon->jsonSerialize());
+    }
 }

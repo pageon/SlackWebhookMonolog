@@ -173,4 +173,14 @@ class ChannelTest extends PHPUnit_Framework_TestCase
         $username = '#azertyuiopqsdfghj1_-_';
         $this->assertEquals($username, new Channel($username));
     }
+
+    /**
+     * The return of the jsonSerialize function should match the toString implementation.
+     */
+    public function testJsonSerialize()
+    {
+        $channel = new Channel('@bob');
+
+        $this->assertEquals((string) $channel, $channel->jsonSerialize());
+    }
 }
