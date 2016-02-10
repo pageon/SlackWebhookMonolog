@@ -2,6 +2,7 @@
 
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
+use Pageon\SlackWebhookMonolog\General\Url;
 use Pageon\SlackWebhookMonolog\Slack\Config;
 use Pageon\SlackWebhookMonolog\Slack\User;
 use Pageon\SlackWebhookMonolog\Slack\Username;
@@ -17,7 +18,9 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             'Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface',
-            new Config(new Webhook('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')),
+            new Config(
+                new Webhook(new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX'))
+            ),
             "The class doesn't implement the ConfigInterface"
         );
     }
@@ -27,14 +30,18 @@ class ConfigTest extends PHPUnit_Framework_TestCase
      */
     public function testWebhook()
     {
-        $webhook = new Webhook('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX');
+        $webhook = new Webhook(
+            new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')
+        );
         $config = new Config($webhook);
         $this->assertEquals($webhook, $config->getWebhook());
     }
 
     public function testCustomUser()
     {
-        $webhook = new Webhook('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX');
+        $webhook = new Webhook(
+            new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')
+        );
         $configWithoutCustomUser = new Config($webhook);
         $this->assertFalse(
             $configWithoutCustomUser->hasCustomUser(),

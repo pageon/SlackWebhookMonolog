@@ -44,7 +44,7 @@ class UrlIconTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateUrl()
     {
-        $this->setExpectedException('Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidUrlException');
+        $this->setExpectedException('Pageon\SlackWebhookMonolog\General\Exceptions\InvalidUrlException');
         new UrlIcon('notAnUrl');
     }
 

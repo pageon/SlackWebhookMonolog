@@ -2,6 +2,7 @@
 
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
+use Pageon\SlackWebhookMonolog\General\Url;
 use Pageon\SlackWebhookMonolog\Slack\Channel;
 use PHPUnit_Framework_TestCase;
 use Pageon\SlackWebhookMonolog\Slack\Webhook;
@@ -15,7 +16,7 @@ class WebhookTest extends PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(
             'Pageon\SlackWebhookMonolog\Slack\Interfaces\WebhookInterface',
-            new Webhook('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX'),
+            new Webhook(new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')),
             "The class doesn't implement the WebhookInterface"
         );
     }
@@ -25,7 +26,7 @@ class WebhookTest extends PHPUnit_Framework_TestCase
      */
     public function testGetUrl()
     {
-        $url = 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX';
+        $url = new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX');
         $webhook = new Webhook($url);
         $this->assertEquals($url, $webhook->getUrl(), 'The webhook url is not returned correctly');
     }
@@ -36,7 +37,7 @@ class WebhookTest extends PHPUnit_Framework_TestCase
     public function testCustomChannel()
     {
         $webhookWithoutCustomChannel = new Webhook(
-            'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX'
+            new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')
         );
         $this->assertFalse(
             $webhookWithoutCustomChannel->hasCustomChannel(),
@@ -45,7 +46,7 @@ class WebhookTest extends PHPUnit_Framework_TestCase
 
         $channel = new Channel('@pageon');
         $webhookWithCustomChannel = new Webhook(
-            'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX',
+            new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX'),
             $channel
         );
         $this->assertTrue(
@@ -65,9 +66,9 @@ class WebhookTest extends PHPUnit_Framework_TestCase
      */
     public function testToString()
     {
-        $url = 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX';
+        $url = new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX');
         $webhook = new Webhook($url);
-        $this->assertEquals($url, $webhook, 'When the Webhook is cast to string it should return the webhook url');
+        $this->assertEquals((string) $url, $webhook, 'When the Webhook is cast to string it should return the webhook url');
     }
 
     /**
@@ -75,8 +76,8 @@ class WebhookTest extends PHPUnit_Framework_TestCase
      */
     public function testValidateUrl()
     {
-        $this->setExpectedException('Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidUrlException');
-        new Webhook('notAnUrl');
+        $this->setExpectedException('Pageon\SlackWebhookMonolog\General\Exceptions\InvalidUrlException');
+        new Webhook(new Url('notAnUrl'));
     }
 
     /**
@@ -85,11 +86,11 @@ class WebhookTest extends PHPUnit_Framework_TestCase
     public function testWhiteSpaceAroundUrl()
     {
         $url = 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX';
-        $this->assertEquals($url, new Webhook(' ' . $url), 'Whitespace before the url should be trimmed');
-        $this->assertEquals($url, new Webhook($url . ' '), 'Whitespace after the url should be trimmed');
+        $this->assertEquals($url, new Webhook(new Url(' ' . $url)), 'Whitespace before the url should be trimmed');
+        $this->assertEquals($url, new Webhook(new Url($url . ' ')), 'Whitespace after the url should be trimmed');
         $this->assertEquals(
             $url,
-            new Webhook(' ' . $url . ' '),
+            new Webhook(new Url(' ' . $url . ' ')),
             'Whitespace before and after the url should be trimmed'
         );
     }

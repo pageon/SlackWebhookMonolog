@@ -2,7 +2,8 @@
 
 namespace Pageon\SlackWebhookMonolog\Slack\Attachment;
 
-use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidUrlException;
+use Pageon\SlackWebhookMonolog\General\SerializeToString;
+use Pageon\SlackWebhookMonolog\General\Url;
 
 /**
  * The title is displayed as larger, bold text near the top of a message attachment.
@@ -12,7 +13,7 @@ use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidUrlException;
  *
  * @since 0.3.2
  */
-final class Title
+final class Title extends SerializeToString
 {
     /**
      * @var string
@@ -20,18 +21,18 @@ final class Title
     private $title;
 
     /**
-     * @var string|null
+     * @var Url|null
      */
     private $link;
 
     /**
      * @param string $title
-     * @param string|null $link
+     * @param Url|null $link
      */
-    public function __construct($title, $link = null)
+    public function __construct($title, Url $link = null)
     {
-        $this->setTitle($title);
-        $this->setLink($link);
+        $this->title = $title;
+        $this->link = $link;
     }
 
     /**
@@ -43,18 +44,6 @@ final class Title
     }
 
     /**
-     * @param string $title
-     *
-     * @return self
-     */
-    private function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
      * @return bool
      */
     public function hasLink()
@@ -63,7 +52,7 @@ final class Title
     }
 
     /**
-     * @return string|null
+     * @return Url|null
      */
     public function getLink()
     {
@@ -71,26 +60,10 @@ final class Title
     }
 
     /**
-     * @param string|null $link
-     *
-     * @return self
+     * {@inheritdoc}
      */
-    private function setLink($link = null)
+    public function __toString()
     {
-        if ($link === null) {
-            return $this;
-        }
-
-        if (!preg_match(
-            '_^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@)?(?:(?!10(?:\.\d{1,3}){3})(?!127(?:\.\d{1,3}){3})(?!169\.254(?:\.\d{1,3}){2})(?!192\.168(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)(?:\.(?:[a-z\x{00a1}-\x{ffff}0-9]+-?)*[a-z\x{00a1}-\x{ffff}0-9]+)*(?:\.(?:[a-z\x{00a1}-\x{ffff}]{2,})))(?::\d{2,5})?(?:/[^\s]*)?$_iu',
-            $link
-        )
-        ) {
-            throw new InvalidUrlException($link . ' is not a valid url');
-        }
-
-        $this->link = $link;
-
-        return $this;
+        return $this->getTitle();
     }
 }

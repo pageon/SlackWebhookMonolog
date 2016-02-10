@@ -2,7 +2,8 @@
 
 namespace Pageon\SlackWebhookMonolog\Slack;
 
-use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidUrlException;
+use Pageon\SlackWebhookMonolog\General\Exceptions\InvalidUrlException;
+use Pageon\SlackWebhookMonolog\General\Url;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\ChannelInterface;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\WebhookInterface;
 
@@ -16,7 +17,7 @@ class Webhook implements WebhookInterface
     /**
      * The url of the webhook. This is provided by slack after creating a webhook.
      *
-     * @var string
+     * @var Url
      */
     private $url;
 
@@ -28,10 +29,10 @@ class Webhook implements WebhookInterface
     private $customChannel = null;
 
     /**
-     * @param string $url The webhook url provided by slack.
+     * @param Url $url The webhook url provided by slack.
      * @param ChannelInterface|null $customChannel if no channel is provided the default will be used from the config in slack.
      */
-    public function __construct($url, ChannelInterface $customChannel = null)
+    public function __construct(Url $url, ChannelInterface $customChannel = null)
     {
         $this->setUrl($url);
         $this->customChannel = $customChannel;
@@ -48,18 +49,16 @@ class Webhook implements WebhookInterface
     /**
      * This wil set the url if it is valid.
      *
-     * @param string $url
+     * @param Url $url
      *
      * @throws InvalidUrlException When it is not a valid webhook url of slack
      *
      * @return self
      */
-    private function setUrl($url)
+    private function setUrl(Url $url)
     {
-        $url = trim($url);
-
         $urlValidationRegex = '_https:\/\/hooks.slack.com\/services\/[\w\/]+$_iuS';
-        if (!preg_match($urlValidationRegex, $url)) {
+        if (!preg_match($urlValidationRegex, (string) $url)) {
             throw new InvalidUrlException(
                 sprintf(
                     'The url: "%s" is not a valid url.
@@ -79,7 +78,7 @@ class Webhook implements WebhookInterface
      */
     public function __toString()
     {
-        return $this->getUrl();
+        return (string) $this->getUrl();
     }
 
     /**

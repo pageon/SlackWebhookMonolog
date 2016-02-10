@@ -3,6 +3,7 @@
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
 use Monolog\Logger;
+use Pageon\SlackWebhookMonolog\General\Url;
 use Pageon\SlackWebhookMonolog\Monolog\Error;
 use Pageon\SlackWebhookMonolog\Slack\Channel;
 use Pageon\SlackWebhookMonolog\Slack\Config;
@@ -45,7 +46,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
     private function getWebhook()
     {
         return new Webhook(
-            'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX',
+            new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX'),
             new Channel('#general')
         );
     }

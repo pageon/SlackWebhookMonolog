@@ -3,6 +3,7 @@
 namespace Pageon\SlackWebhookMonolog\Slack;
 
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\UsernameInterface;
+use Pageon\SlackWebhookMonolog\General\SerializeToString;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>

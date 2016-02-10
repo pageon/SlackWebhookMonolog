@@ -60,7 +60,7 @@ class Payload implements JsonSerializable
     {
         $this->setErrorData();
 
-        $this->setAttachment();
+        $this->setAttachments();
 
         if ($this->slackConfig !== null) {
             $this->generatePayloadForSlackConfig();
@@ -144,17 +144,22 @@ class Payload implements JsonSerializable
         return $this->errorData !== null;
     }
 
-    private function setAttachment()
+    private function setAttachments()
+    {
+        $this->payload['attachments'] = [
+            $this->getBasicInfoAttachment(),
+        ];
+    }
+
+    private function getBasicInfoAttachment()
     {
         $message = $this->hasErrorData() ? $this->errorData->getMessage() : $this->record['message'];
-        $attachment = [
+
+        return [
             'fallback' => sprintf('*%s:* %s', $this->record['level_name'], $message),
             'color' => $this->getAttachmentColor(),
             'title' => $this->record['level_name'],
-            'text' => $message,
         ];
-
-        $this->payload['attachments'] = [$attachment];
     }
 
     /**

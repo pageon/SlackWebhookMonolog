@@ -1,3 +1,13 @@
+0.4.0 (xxxx-xx-xx)
+--
+Improvements:
+
+* Use attachments instead of the plain text messages.
+* Move SerializeToString to the General namespace.
+* Add a general Url so we don't need to keep duplicating the validation.
+
+Bugfixes:
+
 0.3.1 (2016-02-09)
 --
 Improvements:

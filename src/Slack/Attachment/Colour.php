@@ -2,7 +2,7 @@
 
 namespace Pageon\SlackWebhookMonolog\Slack\Attachment;
 
-use JsonSerializable;
+use Pageon\SlackWebhookMonolog\General\SerializeToString;
 use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidColourException;
 
 /**
@@ -13,7 +13,7 @@ use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidColourException;
  *
  * @since 0.3.2
  */
-final class Colour implements JsonSerializable
+final class Colour extends SerializeToString
 {
     const COLOUR_GOOD = 'good';
     const COLOUR_WARNING = 'warning';
@@ -72,15 +72,6 @@ final class Colour implements JsonSerializable
     {
         return $this->getColour();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function jsonSerialize()
-    {
-        return (string) $this;
-    }
-
     /**
      * Get the possible default colours.
      *

@@ -4,6 +4,7 @@ namespace Pageon\SlackWebhookMonolog\Slack;
 
 use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidEmojiException;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\IconInterface;
+use Pageon\SlackWebhookMonolog\General\SerializeToString;
 
 /**
  * @author Jelmer Prins <jelmer@pageon.be>

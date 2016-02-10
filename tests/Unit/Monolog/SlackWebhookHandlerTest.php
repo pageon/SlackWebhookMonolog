@@ -6,6 +6,7 @@ require_once 'Mocks/CurlUtil.php';
 
 use Monolog\Logger;
 use Pageon\SlackChannelMonolog\Tests\Unit\Monolog\Mocks\CurlUtil;
+use Pageon\SlackWebhookMonolog\General\Url;
 use Pageon\SlackWebhookMonolog\Monolog\Config as MonologConfig;
 use Pageon\SlackWebhookMonolog\Monolog\SlackWebhookHandler;
 use Pageon\SlackWebhookMonolog\Slack\Config as SlackConfig;
@@ -34,7 +35,7 @@ class SlackWebhookHandlerTest extends PHPUnit_Framework_TestCase
             'Monolog\Handler\AbstractProcessingHandler',
             new SlackWebhookHandler(
                 new SlackConfig(
-                    new Webhook('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')
+                    new Webhook(new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX'))
                 ),
                 new MonologConfig(Logger::DEBUG),
                 new CurlUtil()
@@ -45,7 +46,7 @@ class SlackWebhookHandlerTest extends PHPUnit_Framework_TestCase
 
     public function testWrite()
     {
-        $webhookUrl = 'https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX';
+        $webhookUrl = new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX');
         $handler = new SlackWebhookHandler(
             new SlackConfig(
                 new Webhook($webhookUrl)
