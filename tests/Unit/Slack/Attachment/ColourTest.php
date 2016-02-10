@@ -52,7 +52,7 @@ class ColourTest extends PHPUnit_Framework_TestCase
 
     public function testInvalidColour()
     {
-        $this->setExpectedException('\Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidAttachmentColourException');
+        $this->setExpectedException('\Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidColourException');
         new Colour('green');
     }
 }

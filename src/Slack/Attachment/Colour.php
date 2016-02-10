@@ -3,7 +3,7 @@
 namespace Pageon\SlackWebhookMonolog\Slack\Attachment;
 
 use JsonSerializable;
-use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidAttachmentColourException;
+use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidColourException;
 
 /**
  * An optional value that can either be one of good, warning, danger, or any hex color code (eg. #439FE0).
@@ -45,7 +45,7 @@ final class Colour implements JsonSerializable
                 $colour
             )
         ) {
-            throw new InvalidAttachmentColourException(
+            throw new InvalidColourException(
                 sprintf(
                     'The colour "%s" is not a valid colour. Possible options are "%s" or a valid hex colour',
                     $colour,

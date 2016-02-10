@@ -9,6 +9,6 @@ use InvalidArgumentException;
  *
  * @since 0.1.0
  */
-class InvalidAttachmentColourException extends InvalidArgumentException
+class InvalidColourException extends InvalidArgumentException
 {
 }
