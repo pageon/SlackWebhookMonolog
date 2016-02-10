@@ -77,7 +77,7 @@ class WebhookTest extends PHPUnit_Framework_TestCase
     public function testValidateUrl()
     {
         $this->setExpectedException('Pageon\SlackWebhookMonolog\General\Exceptions\InvalidUrlException');
-        new Webhook(new Url('notAnUrl'));
+        new Webhook(new Url('http://google.com'));
     }
 
     /**
