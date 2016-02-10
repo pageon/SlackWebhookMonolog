@@ -2,6 +2,7 @@
 
 namespace Pageon\SlackChannelMonolog\Tests\Unit\Slack;
 
+use Monolog\Logger;
 use Pageon\SlackWebhookMonolog\Monolog\Error;
 use Pageon\SlackWebhookMonolog\Slack\Channel;
 use Pageon\SlackWebhookMonolog\Slack\Config;
@@ -22,10 +23,10 @@ class PayloadTest extends PHPUnit_Framework_TestCase
      *
      * @return array
      */
-    private function getRecord($addErrorContext = false)
+    private function getRecord($addErrorContext = false, $level = Logger::ERROR)
     {
         $record = json_decode(
-            '{"message":"Test success","context":{},"level":400,"level_name":"ERROR","channel":"pageon","datetime":{"date":"2016-02-08 01:01:36.719769","timezone_type":3,"timezone":"Europe\/Brussels"},"extra":[],"formatted":"[2016-02-08 01:01:36] pageon.ERROR: Test success {\"error\":\"[object] (Pageon\\\\SlackWebhookMonolog\\\\Monolog\\\\Error: {})\"} []\n"}',
+            '{"message":"Test success","context":{},"level":' . $level . ',"level_name":"ERROR","channel":"pageon","datetime":{"date":"2016-02-08 01:01:36.719769","timezone_type":3,"timezone":"Europe\/Brussels"},"extra":[],"formatted":"[2016-02-08 01:01:36] pageon.ERROR: Test success {\"error\":\"[object] (Pageon\\\\SlackWebhookMonolog\\\\Monolog\\\\Error: {})\"} []\n"}',
             true
         );
 
@@ -77,14 +78,14 @@ class PayloadTest extends PHPUnit_Framework_TestCase
     {
         $payload = new Payload($this->getRecord());
 
-        $this->assertContains('"text":"*ERROR:* Test success"', json_encode($payload));
+        $this->assertContains('"fallback":"*ERROR:* Test success"', json_encode($payload));
     }
 
     public function testPayloadWithErrorContext()
     {
         $payload = json_encode(new Payload($this->getRecord(true)));
 
-        $this->assertContains('"text":"*ERROR:* Test with context"', $payload);
+        $this->assertContains('"fallback":"*ERROR:* Test with context"', $payload);
     }
 
     public function testCustomChannel()
@@ -119,5 +120,13 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertContains('"icon_url":"https:\/\/slack.com\/img\/icons\/app-57.png"', $payload);
+    }
+
+    public function testAttachementColours()
+    {
+        $this->assertContains('"color":"danger"', json_encode(new Payload($this->getRecord(true))));
+        $this->assertContains('"color":"warning"', json_encode(new Payload($this->getRecord(true, Logger::WARNING))));
+        $this->assertContains('"color":"good"', json_encode(new Payload($this->getRecord(true, Logger::INFO))));
+        $this->assertContains('"color":"#e3e4e6"', json_encode(new Payload($this->getRecord(true, Logger::DEBUG))));
     }
 }

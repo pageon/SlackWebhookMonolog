@@ -3,6 +3,7 @@
 namespace Pageon\SlackWebhookMonolog\Slack;
 
 use JsonSerializable;
+use Monolog\Logger;
 use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ErrorInterface;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface as SlackConfigInterface;
 
@@ -59,7 +60,7 @@ class Payload implements JsonSerializable
     {
         $this->setErrorData();
 
-        $this->setMessage();
+        $this->setAttachment();
 
         if ($this->slackConfig !== null) {
             $this->generatePayloadForSlackConfig();
@@ -143,13 +144,17 @@ class Payload implements JsonSerializable
         return $this->errorData !== null;
     }
 
-    private function setMessage()
+    private function setAttachment()
     {
-        $this->payload['text'] = sprintf(
-            '*%s:* %s',
-            $this->record['level_name'],
-            $this->hasErrorData() ? $this->errorData->getMessage() : $this->record['message']
-        );
+        $message = $this->hasErrorData() ? $this->errorData->getMessage() : $this->record['message'];
+        $attachment = [
+            'fallback' => sprintf('*%s:* %s', $this->record['level_name'], $message),
+            'color' => $this->getAttachmentColor(),
+            'title' => $this->record['level_name'],
+            'text' => $message,
+        ];
+
+        $this->payload['attachments'] = [$attachment];
     }
 
     /**
@@ -158,5 +163,25 @@ class Payload implements JsonSerializable
     public function jsonSerialize()
     {
         return $this->payload;
+    }
+
+    /**
+     * Returned a Slack message attachment color associated with
+     * provided level.
+     *
+     * @return string
+     */
+    private function getAttachmentColor()
+    {
+        switch (true) {
+            case $this->record['level'] >= Logger::ERROR:
+                return 'danger';
+            case $this->record['level'] >= Logger::WARNING:
+                return 'warning';
+            case $this->record['level'] >= Logger::INFO:
+                return 'good';
+            default:
+                return '#e3e4e6';
+        }
     }
 }
