@@ -58,7 +58,7 @@ final class Author extends SerializeToString
     }
 
     /**
-     * @return null|Url
+     * @return Url|null
      */
     public function getUrl()
     {
@@ -74,7 +74,7 @@ final class Author extends SerializeToString
     }
 
     /**
-     * @return null|Url
+     * @return Url|null
      */
     public function getIcon()
     {
@@ -82,7 +82,7 @@ final class Author extends SerializeToString
     }
 
     /**
-     * @return null
+     * @return bool
      */
     public function hasIcon()
     {
@@ -90,7 +90,7 @@ final class Author extends SerializeToString
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __toString()
     {
