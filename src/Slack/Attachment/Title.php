@@ -16,11 +16,15 @@ use Pageon\SlackWebhookMonolog\General\Url;
 final class Title extends SerializeToString
 {
     /**
+     * The title is displayed as larger, bold text near the top of a message attachment.
+     *
      * @var string
      */
     private $title;
 
     /**
+     * By passing a valid URL in the link parameter (optional), the title text will be hyperlinked.
+     *
      * @var Url|null
      */
     private $link;
