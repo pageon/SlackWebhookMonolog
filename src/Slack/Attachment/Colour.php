@@ -11,7 +11,7 @@ use Pageon\SlackWebhookMonolog\Slack\Exceptions\InvalidColourException;
  *
  * @author Jelmer Prins <jelmer@pageon.be>
  *
- * @since 0.3.2
+ * @since 0.4.0
  */
 final class Colour extends SerializeToString
 {

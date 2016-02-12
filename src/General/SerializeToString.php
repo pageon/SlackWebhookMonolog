@@ -9,7 +9,7 @@ use JsonSerializable;
  *
  * @author Jelmer Prins <jelmer@pageon.be>
  *
- * @since 0.3.2
+ * @since 0.4.0
  */
 abstract class SerializeToString implements JsonSerializable
 {

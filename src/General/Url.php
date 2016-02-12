@@ -7,7 +7,7 @@ use Pageon\SlackWebhookMonolog\General\Exceptions\InvalidUrlException;
 /**
  * @author Jelmer Prins <jelmer@pageon.be>
  *
- * @since 0.3.2
+ * @since 0.4.0
  */
 class Url extends SerializeToString
 {

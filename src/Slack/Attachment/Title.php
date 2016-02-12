@@ -11,7 +11,7 @@ use Pageon\SlackWebhookMonolog\General\Url;
  *
  * @author Jelmer Prins <jelmer@pageon.be>
  *
- * @since 0.3.2
+ * @since 0.4.0
  */
 final class Title extends SerializeToString
 {
