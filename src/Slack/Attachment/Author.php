@@ -26,7 +26,7 @@ final class Author extends SerializeToString
      *
      * @var Url|null
      */
-    private $url;
+    private $link;
 
     /**
      * A valid URL that displays a small 16x16px image to the left of the name.
@@ -39,13 +39,13 @@ final class Author extends SerializeToString
      * Author constructor.
      *
      * @param string $name
-     * @param Url|null $url
+     * @param Url|null $link
      * @param Url|null $icon
      */
-    public function __construct($name, Url $url = null, Url $icon = null)
+    public function __construct($name, Url $link = null, Url $icon = null)
     {
         $this->name = $name;
-        $this->url = $url;
+        $this->link = $link;
         $this->icon = $icon;
     }
 
@@ -60,17 +60,17 @@ final class Author extends SerializeToString
     /**
      * @return Url|null
      */
-    public function getUrl()
+    public function getLink()
     {
-        return $this->url;
+        return $this->link;
     }
 
     /**
      * @return bool
      */
-    public function hasUrl()
+    public function hasLink()
     {
-        return $this->url !== null;
+        return $this->link !== null;
     }
 
     /**

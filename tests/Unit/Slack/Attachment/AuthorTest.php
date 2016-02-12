@@ -19,15 +19,15 @@ class AuthorTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('"' . $name . '"', json_encode($author));
     }
 
-    public function testUrl()
+    public function testLink()
     {
-        $authorNoUrl = new Author('J.R.R. Tolkien');
-        $this->assertFalse($authorNoUrl->hasUrl());
+        $authorNoLink = new Author('J.R.R. Tolkien');
+        $this->assertFalse($authorNoLink->hasLink());
 
-        $url = new Url('https://en.wikipedia.org/wiki/George_Orwell');
-        $authorUrl = new Author('George Orwell', $url);
-        $this->assertTrue($authorUrl->hasUrl());
-        $this->assertEquals($url, $authorUrl->getUrl());
+        $link = new Url('https://en.wikipedia.org/wiki/George_Orwell');
+        $authorLink = new Author('George Orwell', $link);
+        $this->assertTrue($authorLink->hasLink());
+        $this->assertEquals($link, $authorLink->getLink());
     }
 
     public function testIcon()
