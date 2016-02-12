@@ -5,6 +5,7 @@ Improvements:
 * Use attachments instead of the plain text messages.
 * Move SerializeToString to the General namespace.
 * Add a general Url so we don't need to keep duplicating the validation.
+* Added a class for slack string formatting.
 
 Bugfixes:
 
