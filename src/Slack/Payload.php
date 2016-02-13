@@ -5,6 +5,7 @@ namespace Pageon\SlackWebhookMonolog\Slack;
 use JsonSerializable;
 use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ErrorInterface;
 use Pageon\SlackWebhookMonolog\Slack\Attachment\BasicInfoAttachment;
+use Pageon\SlackWebhookMonolog\Slack\Attachment\TraceAttachment;
 use Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface as SlackConfigInterface;
 
 /**
@@ -139,6 +140,16 @@ class Payload implements JsonSerializable
         $this->payload['attachments'] = [
             new BasicInfoAttachment($this->record, $this->errorData),
         ];
+
+        if ($this->errorData !== null) {
+            $this->addErrorSpecificAttachments();
+        }
+    }
+
+    private function addErrorSpecificAttachments()
+    {
+        $formatter = new StringFormat();
+        $this->payload['attachments'][] = new TraceAttachment($this->errorData, $formatter);
     }
 
     /**

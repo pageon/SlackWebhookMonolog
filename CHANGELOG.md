@@ -1,3 +1,13 @@
+0.4.1 (xxxx-xx-xx)
+--
+Improvements:
+
+* added attachment for the trace
+
+Bugfixes:
+
+* fix newlines in the formatter class
+
 0.4.0 (2016-02-13)
 --
 Improvements:

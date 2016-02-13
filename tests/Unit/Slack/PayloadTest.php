@@ -86,9 +86,9 @@ class PayloadTest extends PHPUnit_Framework_TestCase
 
     public function testPayloadWithErrorContext()
     {
-        $payload = json_encode(new Payload($this->getRecord(true)));
+        $payload = new Payload($this->getRecord(true));
 
-        $this->assertContains('"fallback":"Test with context"', $payload);
+        $this->assertContains('"fallback":"Test with context"', (string) $payload);
     }
 
     public function testCustomChannel()
@@ -130,7 +130,7 @@ class PayloadTest extends PHPUnit_Framework_TestCase
         $this->assertContains('"icon_url":"https:\/\/slack.com\/img\/icons\/app-57.png"', $payload);
     }
 
-    public function testAttachementColours()
+    public function testAttachmentColours()
     {
         $this->assertContains('"color":"danger"', json_encode(new Payload($this->getRecord(true))));
         $this->assertContains('"color":"warning"', json_encode(new Payload($this->getRecord(true, Logger::WARNING))));

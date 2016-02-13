@@ -46,7 +46,7 @@ class StringFormatTest extends PHPUnit_Framework_TestCase
         $stringFormat = new StringFormat();
 
         $this->assertEquals(
-            '1. First item\n2. Second item\n3. Third item\n',
+            "1. First item\n2. Second item\n3. Third item\n",
             $stringFormat->arrayToNumberedList(['First item', 'Second item', 'Third item'])
         );
     }
@@ -56,12 +56,12 @@ class StringFormatTest extends PHPUnit_Framework_TestCase
         $stringFormat = new StringFormat();
 
         $this->assertEquals(
-            '• First item\n• Second item\n• Third item\n',
+            "• First item\n• Second item\n• Third item\n",
             $stringFormat->arrayToBulletList(['First item', 'Second item', 'Third item'])
         );
 
         $this->assertEquals(
-            '§ First item\n§ Second item\n§ Third item\n',
+            "§ First item\n§ Second item\n§ Third item\n",
             $stringFormat->arrayToBulletList(['First item', 'Second item', 'Third item'], '§')
         );
     }
@@ -86,8 +86,8 @@ class StringFormatTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('>I am indented', $stringFormat->indent('I am indented'));
         $this->assertEquals(
-            '>I am indented\n>And the next line too',
-            $stringFormat->indent('I am indented\nAnd the next line too')
+            ">I am indented\n>And the next line too",
+            $stringFormat->indent("I am indented\nAnd the next line too")
         );
     }
 }
