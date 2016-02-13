@@ -44,7 +44,7 @@ class TraceAttachment extends Attachment
         $this->setText(
             $formatter->arrayToNumberedList(
                 array_map(
-                    function ($traceItem) {
+                    function($traceItem) {
                         return $this->parseTraceItem($traceItem);
                     },
                     $this->error->getTrace()
@@ -65,12 +65,12 @@ class TraceAttachment extends Attachment
             'arguments' => isset($traceItem['args']) ?
                 "\n" . $this->formatter->arrayToKeyValueList(
                     array_map(
-                        function ($item) {
+                        function($item) {
                             return print_r($item, true);
                         },
                         array_filter(
                             $traceItem['args'],
-                            function ($item) {
+                            function($item) {
                                 return !empty($item);
                             }
                         )
