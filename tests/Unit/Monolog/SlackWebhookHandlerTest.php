@@ -20,10 +20,14 @@ class SlackWebhookHandlerTest extends PHPUnit_Framework_TestCase
      */
     private function getRecord()
     {
-        return json_decode(
-            '{"message":"Test success","context":{},"level":400,"level_name":"ERROR","channel":"pageon","datetime":{"date":"2016-02-08 01:01:36.719769","timezone_type":3,"timezone":"Europe\/Brussels"},"extra":[],"formatted":"[2016-02-08 01:01:36] pageon.ERROR: Test success {\"error\":\"[object] (Pageon\\\\SlackWebhookMonolog\\\\Monolog\\\\Error: {})\"} []\n"}',
+        $record = json_decode(
+            '{"message":"Test success","context":{},"level":400,"level_name":"ERROR","channel":"pageon","extra":[],"formatted":"[2016-02-08 01:01:36] pageon.ERROR: Test success {\"error\":\"[object] (Pageon\\\\SlackWebhookMonolog\\\\Monolog\\\\Error: {})\"} []\n"}',
             true
         );
+
+        $record['datetime'] = new \DateTime();
+
+        return $record;
     }
 
     /**
@@ -35,7 +39,9 @@ class SlackWebhookHandlerTest extends PHPUnit_Framework_TestCase
             'Monolog\Handler\AbstractProcessingHandler',
             new SlackWebhookHandler(
                 new SlackConfig(
-                    new Webhook(new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX'))
+                    new Webhook(
+                        new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')
+                    )
                 ),
                 new MonologConfig(Logger::DEBUG),
                 new CurlUtil()

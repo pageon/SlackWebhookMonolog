@@ -31,6 +31,8 @@ class PayloadTest extends PHPUnit_Framework_TestCase
             true
         );
 
+        $record['datetime'] = new \DateTime();
+
         if (!$addErrorContext) {
             return $record;
         }
@@ -79,14 +81,14 @@ class PayloadTest extends PHPUnit_Framework_TestCase
     {
         $payload = new Payload($this->getRecord());
 
-        $this->assertContains('"fallback":"*ERROR:* Test success"', json_encode($payload));
+        $this->assertContains('"fallback":"Test success"', json_encode($payload));
     }
 
     public function testPayloadWithErrorContext()
     {
         $payload = json_encode(new Payload($this->getRecord(true)));
 
-        $this->assertContains('"fallback":"*ERROR:* Test with context"', $payload);
+        $this->assertContains('"fallback":"Test with context"', $payload);
     }
 
     public function testCustomChannel()

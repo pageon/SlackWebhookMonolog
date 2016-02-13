@@ -148,4 +148,12 @@ class Payload implements JsonSerializable
     {
         return $this->payload;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return json_encode($this->jsonSerialize());
+    }
 }

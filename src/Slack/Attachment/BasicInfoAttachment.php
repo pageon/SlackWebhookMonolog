@@ -40,9 +40,18 @@ class BasicInfoAttachment extends Attachment
         $this->error = $error;
 
         $message = ($this->error !== null) ? $this->error->getMessage() : $this->record['message'];
-        parent::__construct(sprintf('*%s:* %s', $this->record['level_name'], $message));
+        parent::__construct($message);
 
-        $this->setColour($this->getColour());
+        $this->setColour($this->getColourForLoggerLevel());
+        $this->setText(sprintf('*Error:* %s', $this->record['level_name']));
+        $this->addField(new Field('What', $message));
+
+        $this->addField(new Field('When', $this->record['datetime']->format('d/m/Y H:m:i'), true));
+
+        if ($this->error !== null) {
+            $this->addField(new Field('Line', $this->error->getLine(), true));
+            $this->addField(new Field('File', $this->error->getFile()));
+        }
     }
 
     /**
@@ -51,7 +60,7 @@ class BasicInfoAttachment extends Attachment
      *
      * @return Colour
      */
-    private function getColour()
+    private function getColourForLoggerLevel()
     {
         switch (true) {
             case $this->record['level'] >= Logger::ERROR:
