@@ -1,8 +1,10 @@
-0.4.1 (xxxx-xx-xx)
+1.0.0 (2016-02-13)
 --
 Improvements:
 
 * added attachment for the trace
+* added attachment for the parameters
+* code style improvements
 
 Bugfixes:
 
