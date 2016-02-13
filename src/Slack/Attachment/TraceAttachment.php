@@ -67,7 +67,6 @@ class TraceAttachment extends Attachment
             'line' => $this->getArrayValue($traceItem, 'line', 'unknown'),
             'class' => $this->getArrayValue($traceItem, 'class', 'unknown'),
             'type' => $this->getArrayValue($traceItem, 'type', 'unknown'),
-            'arguments' => $this->parseArguments($traceItem),
         ];
         $text .= $this->formatter->arrayToKeyValueList($info);
 
@@ -84,27 +83,5 @@ class TraceAttachment extends Attachment
     private function getArrayValue(array $array, $key, $fallback = null)
     {
         return isset($array[$key]) ? $array[$key] : $fallback;
-    }
-
-    /**
-     * @param $traceItem
-     *
-     * @return string
-     */
-    private function parseArguments($traceItem)
-    {
-        return "\n" . $this->formatter->arrayToKeyValueList(
-            array_map(
-                function ($item) {
-                    return print_r($item, true);
-                },
-                array_filter(
-                    isset($traceItem['args']) ? $traceItem['args'] : [],
-                    function ($item) {
-                        return !empty($item);
-                    }
-                )
-            )
-        );
     }
 }

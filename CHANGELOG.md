@@ -1,3 +1,11 @@
+1.0.1 (2016-02-13)
+--
+Improvements:
+
+Bugfixes:
+
+* Stop logging the arguments of the backtrace since that can lead to memory overflow
+
 1.0.0 (2016-02-13)
 --
 Improvements:
