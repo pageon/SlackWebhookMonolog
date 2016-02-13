@@ -387,6 +387,22 @@ final class Attachment implements JsonSerializable
     }
 
     /**
+     * @return bool
+     */
+    public function hasMarkdownSettings()
+    {
+        return !empty($this->markdownIn);
+    }
+
+    /**
+     * @return array
+     */
+    public function getMarkdownSettings()
+    {
+        return $this->markdownIn;
+    }
+
+    /**
      * @inheritDoc
      */
     public function jsonSerialize()
@@ -401,194 +417,6 @@ final class Attachment implements JsonSerializable
      */
     public function get()
     {
-        $attachment = [
-            'fallback' => $this->getFallback()
-        ];
-
-        $attachment = $this->addColourToAttachment($attachment);
-        $attachment = $this->addTextToAttachment($attachment);
-        $attachment = $this->addPretextToAttachment($attachment);
-        $attachment = $this->addAuthorToAttachment($attachment);
-        $attachment = $this->addTitleToAttachment($attachment);
-        $attachment = $this->addFieldsToAttachment($attachment);
-        $attachment = $this->addImageToAttachment($attachment);
-        $attachment = $this->addThumbnailToAttachment($attachment);
-        $attachment = $this->addMarkdownSettingsToAttachment($attachment);
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the colour to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addColourToAttachment(array $attachment)
-    {
-        if (!$this->hasColour()) {
-            return $attachment;
-        }
-
-        $attachment['color'] = $this->getColour();
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the text to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addTextToAttachment(array $attachment)
-    {
-        if (!$this->hasText()) {
-            return $attachment;
-        }
-
-        $attachment['text'] = $this->getText();
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the pretext to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addPretextToAttachment(array $attachment)
-    {
-        if (!$this->hasPretext()) {
-            return $attachment;
-        }
-
-        $attachment['pretext'] = $this->getPretext();
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the author to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addAuthorToAttachment(array $attachment)
-    {
-        if (!$this->hasAuthor()) {
-            return $attachment;
-        }
-
-        $attachment['author_name'] = $this->getAuthor();
-
-        if ($this->getAuthor()->hasIcon()) {
-            $attachment['author_icon'] = $this->getAuthor()->getIcon();
-        }
-
-        if ($this->getAuthor()->hasLink()) {
-            $attachment['author_link'] = $this->getAuthor()->getLink();
-        }
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the title to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addTitleToAttachment(array $attachment)
-    {
-        if (!$this->hasTitle()) {
-            return $attachment;
-        }
-
-        $attachment['title'] = $this->getTitle();
-
-        if ($this->getTitle()->hasLink()) {
-            $attachment['title_link'] = $this->getTitle()->getLink();
-        }
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the fields to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addFieldsToAttachment(array $attachment)
-    {
-        if (!$this->hasFields()) {
-            return $attachment;
-        }
-
-        $attachment['fields'] = $this->getFields();
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the image to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addImageToAttachment(array $attachment)
-    {
-        if (!$this->hasImage()) {
-            return $attachment;
-        }
-
-        $attachment['image_url'] = $this->getImage();
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the thumbnail to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addThumbnailToAttachment(array $attachment)
-    {
-        if (!$this->hasThumbnail()) {
-            return $attachment;
-        }
-
-        $attachment['thumb_url'] = $this->getThumbnail();
-
-        return $attachment;
-    }
-
-    /**
-     * If set, add the fields to the attachment.
-     *
-     * @param array $attachment
-     *
-     * @return array
-     */
-    private function addMarkdownSettingsToAttachment(array $attachment)
-    {
-        if (empty($this->markdownIn)) {
-            return $attachment;
-        }
-
-        $attachment['mrkdwn_in'] = $this->markdownIn;
-
-        return $attachment;
+        return (new Builder($this))->build();
     }
 }
