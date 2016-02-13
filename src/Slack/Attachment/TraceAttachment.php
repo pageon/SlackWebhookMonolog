@@ -53,32 +53,59 @@ class TraceAttachment extends Attachment
         );
     }
 
+    /**
+     * Parse all the data into the markup of slack.
+     *
+     * @param array $traceItem
+     *
+     * @return string
+     */
     private function parseTraceItem(array $traceItem)
     {
         $text = '';
         $info = [
-            'file' => isset($traceItem['file']) ? $traceItem['file'] : 'unknown',
-            'function' => isset($traceItem['function']) ? $traceItem['function'] : 'unknown',
-            'line' => isset($traceItem['line']) ? $traceItem['line'] : 'unknown',
-            'class' => isset($traceItem['class']) ? $traceItem['class'] : 'unknown',
-            'type' => isset($traceItem['type']) ? $traceItem['type'] : 'unknown',
-            'arguments' => isset($traceItem['args']) ?
-                "\n" . $this->formatter->arrayToKeyValueList(
-                    array_map(
-                        function ($item) {
-                            return print_r($item, true);
-                        },
-                        array_filter(
-                            $traceItem['args'],
-                            function ($item) {
-                                return !empty($item);
-                            }
-                        )
-                    )
-                ) : 'unknown',
+            'file' => $this->getArrayValue($traceItem, 'file', 'unknown'),
+            'function' => $this->getArrayValue($traceItem, 'function', 'unknown'),
+            'line' => $this->getArrayValue($traceItem, 'line', 'unknown'),
+            'class' => $this->getArrayValue($traceItem, 'class', 'unknown'),
+            'type' => $this->getArrayValue($traceItem, 'type', 'unknown'),
+            'arguments' => $this->parseArguments($traceItem),
         ];
         $text .= $this->formatter->arrayToKeyValueList($info);
 
         return "\n" . $this->formatter->indent($text);
+    }
+
+    /**
+     * @param array $array
+     * @param string $key
+     * @param mixed|null $fallback
+     *
+     * @return mixed
+     */
+    private function getArrayValue(array $array, $key, $fallback = null)
+    {
+        return isset($array[$key]) ? $array[$key] : $fallback;
+    }
+
+    /**
+     * @param $traceItem
+     * @return string
+     */
+    private function parseArguments($traceItem)
+    {
+        return "\n" . $this->formatter->arrayToKeyValueList(
+            array_map(
+                function ($item) {
+                    return print_r($item, true);
+                },
+                array_filter(
+                    isset($traceItem['args']) ? $traceItem['args'] : [],
+                    function ($item) {
+                        return !empty($item);
+                    }
+                )
+            )
+        );
     }
 }
