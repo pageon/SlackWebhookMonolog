@@ -12,7 +12,7 @@ use Pageon\SlackWebhookMonolog\General\Url;
  *
  * @since 0.4.0
  */
-final class Attachment implements JsonSerializable
+class Attachment implements JsonSerializable
 {
     /**
      * The attachment itself.

@@ -91,8 +91,13 @@ class PayloadTest extends PHPUnit_Framework_TestCase
 
     public function testCustomChannel()
     {
-        $payload = json_encode(new Payload($this->getRecord(true), new Config($this->getWebhook())));
+        $webhookWithoutChannel = new Webhook(
+            new Url('https://hooks.slack.com/services/XXXXXXXXX/XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXXXXX')
+        );
+        $payload = json_encode(new Payload($this->getRecord(true), new Config($webhookWithoutChannel)));
+        $this->assertNotContains('"channel"', $payload);
 
+        $payload = json_encode(new Payload($this->getRecord(true), new Config($this->getWebhook())));
         $this->assertContains('"channel":"#general"', $payload);
     }
 
