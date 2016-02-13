@@ -166,10 +166,12 @@ class AttachmentTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(isset($attachment->get()['fields']));
 
         $field = new Field('title', 'Jelmer wrote it');
-        $attachment->addField($field);
+        $attachment->addFields([$field, $field]);
+
         $attachmentArray = $attachment->get();
         $this->assertTrue(isset($attachmentArray['fields']));
         $this->assertEquals($field, $attachmentArray['fields'][0]);
+
         $this->assertContains('"fields":', json_encode($attachment));
         $this->assertContains(json_encode($field), json_encode($attachment));
     }
