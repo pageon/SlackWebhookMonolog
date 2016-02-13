@@ -1,3 +1,11 @@
+1.0.2 (2016-02-13)
+--
+Improvements:
+
+* Added an example picture of how the message arrived in Slack
+
+Bugfixes:
+
 1.0.1 (2016-02-13)
 --
 Improvements:
