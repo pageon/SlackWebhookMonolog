@@ -9,11 +9,11 @@ use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ErrorInterface;
 use Pageon\SlackWebhookMonolog\Slack\StringFormat;
 
 /**
- * An attachment containing basic info about the error.
+ * An attachment containing the trace the error.
  *
  * @author Jelmer Prins <jelmer@pageon.be>
  *
- * @since 0.4.0
+ * @since 0.4.1
  */
 class TraceAttachment extends Attachment
 {
@@ -37,6 +37,7 @@ class TraceAttachment extends Attachment
      */
     public function __construct(ErrorInterface $error, StringFormat $formatter)
     {
+        parent::__construct('Trace');
         $this->error = $error;
         $this->formatter = $formatter;
 
