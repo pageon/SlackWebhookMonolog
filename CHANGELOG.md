@@ -1,3 +1,9 @@
+1.0.3 (2016-02-13)
+--
+Improvements:
+
+* Provide minimal usage explanation in the readme
+
 1.0.2 (2016-02-13)
 --
 Improvements:
