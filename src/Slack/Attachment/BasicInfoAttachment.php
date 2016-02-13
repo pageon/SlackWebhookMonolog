@@ -2,9 +2,7 @@
 
 namespace Pageon\SlackWebhookMonolog\Slack\Attachment;
 
-use JsonSerializable;
 use Monolog\Logger;
-use Pageon\SlackWebhookMonolog\General\Url;
 use Pageon\SlackWebhookMonolog\Monolog\Interfaces\ErrorInterface;
 
 /**

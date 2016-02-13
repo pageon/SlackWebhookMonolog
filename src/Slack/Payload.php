@@ -163,7 +163,7 @@ class Payload implements JsonSerializable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function __toString()
     {

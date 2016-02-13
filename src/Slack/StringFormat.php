@@ -2,10 +2,6 @@
 
 namespace Pageon\SlackWebhookMonolog\Slack;
 
-use Pageon\SlackWebhookMonolog\Slack\Interfaces\ConfigInterface;
-use Pageon\SlackWebhookMonolog\Slack\Interfaces\UserInterface;
-use Pageon\SlackWebhookMonolog\Slack\Interfaces\WebhookInterface;
-
 /**
  * @author Jelmer Prins <jelmer@pageon.be>
  *
@@ -28,7 +24,7 @@ final class StringFormat
     }
 
     /**
-     * This will emphasis the string by wrapping it between *
+     * This will emphasis the string by wrapping it between *.
      *
      * @param string $text
      *
@@ -40,7 +36,7 @@ final class StringFormat
     }
 
     /**
-     * This will italicize the string by wrapping it between _
+     * This will italicize the string by wrapping it between _.
      *
      * @param string $text
      *
@@ -52,7 +48,7 @@ final class StringFormat
     }
 
     /**
-     * This will strikethrough the string by wrapping it between ~
+     * This will strikethrough the string by wrapping it between ~.
      *
      * @param string $text
      *
@@ -64,7 +60,7 @@ final class StringFormat
     }
 
     /**
-     * Create a block of pre-formatted, fixed-width text
+     * Create a block of pre-formatted, fixed-width text.
      *
      * @param string $text
      *
@@ -167,6 +163,6 @@ final class StringFormat
      */
     private function wrapStringWith($text, $wrapper)
     {
-        return sprintf("%1\$s%2\$s%1\$s", $wrapper, $text);
+        return sprintf('%1$s%2$s%1$s', $wrapper, $text);
     }
 }

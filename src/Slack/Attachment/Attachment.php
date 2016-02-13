@@ -20,7 +20,7 @@ class Attachment implements JsonSerializable
      *
      * @var array
      */
-    private $attachment = ['mrkdwn_in' => ["pretext", "text", "fields"]];
+    private $attachment = ['mrkdwn_in' => ['pretext', 'text', 'fields']];
 
     /**
      * Attachment constructor.
@@ -183,7 +183,7 @@ class Attachment implements JsonSerializable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function jsonSerialize()
     {
