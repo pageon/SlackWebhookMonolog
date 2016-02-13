@@ -98,7 +98,7 @@ final class StringFormat
      */
     public function indent($text)
     {
-        return '>' . str_replace('\n', '\n>', $text);
+        return '>' . str_replace("\n", "\n>", $text);
     }
 
     /**
@@ -114,7 +114,25 @@ final class StringFormat
         $number = 1;
 
         foreach ($listItems as $listItem) {
-            $formattedList .= sprintf('%d. %s\n', $number++, (string) $listItem);
+            $formattedList .= sprintf("%d. %s\n", $number++, (string) $listItem);
+        }
+
+        return $formattedList;
+    }
+
+    /**
+     * This will generate a numbered list from an array.
+     *
+     * @param array $listItems
+     *
+     * @return string
+     */
+    public function arrayToKeyValueList(array $listItems)
+    {
+        $formattedList = '';
+
+        foreach ($listItems as $key => $value) {
+            $formattedList .= sprintf("%s: %s\n", $this->emphasis($key), (string) $value);
         }
 
         return $formattedList;
@@ -133,7 +151,7 @@ final class StringFormat
         $formattedList = '';
 
         foreach ($listItems as $listItem) {
-            $formattedList .= sprintf('%s %s\n', $bulletCharacter, (string) $listItem);
+            $formattedList .= sprintf("%s %s\n", $bulletCharacter, (string) $listItem);
         }
 
         return $formattedList;
@@ -149,6 +167,6 @@ final class StringFormat
      */
     private function wrapStringWith($text, $wrapper)
     {
-        return sprintf('%1$s%2$s%1$s', $wrapper, $text);
+        return sprintf("%1\$s%2\$s%1\$s", $wrapper, $text);
     }
 }
