@@ -46,6 +46,14 @@ class BasicInfoAttachment extends Attachment
 
         $this->addField(new Field('When', $this->record['datetime']->format('d/m/Y H:m:i'), true));
 
+        if (!empty($this->record['context'])) {
+            $this->addField(new Field('Context', json_encode($this->record['context'])));
+        }
+
+        if (!empty($this->record['extra'])) {
+            $this->addField(new Field('Extra', json_encode($this->record['extra'])));
+        }
+
         if ($this->error !== null) {
             $this->addField(new Field('Line', $this->error->getLine(), true));
             $this->addField(new Field('File', $this->error->getFile()));
