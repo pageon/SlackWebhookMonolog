@@ -134,6 +134,9 @@ class Payload implements JsonSerializable
         }
 
         $this->errorData = $this->record['context']['error'];
+
+        // remove the error from the context so we can use it for for other things.
+        unset($this->record['context']['error']);
     }
 
     private function setAttachments()
