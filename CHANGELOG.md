@@ -1,3 +1,15 @@
+1.1.O (2016-02-19)
+--
+Improvements:
+
+* Added link to implementation example
+* Include "context" and "extra" in basic info attachment (by michaelmoussa)
+* Removed the error from the context after extracting it
+
+Bugfixes:
+
+* Fix image in readme that should've been a link (by woutersioen)
+
 1.0.3 (2016-02-13)
 --
 Improvements:
