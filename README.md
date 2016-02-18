@@ -15,7 +15,7 @@ In order to be able to use slack for monolog I implemented it using webhooks.
 
 As simple as pushing your `\Pageon\SlackWebhookMonolog\Monolog\SlackWebhookHandler` as a handler to Monolog
 
-For an example of an implementation see ![implementation example](https://github.com/Pageon/pageon-fork-config)
+For an example of an implementation see [implementation example](https://github.com/Pageon/pageon-fork-config)
 
 ## Example of message in Slack
 ![example](example.png?raw=true)
