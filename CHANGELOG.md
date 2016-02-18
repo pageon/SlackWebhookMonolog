@@ -1,3 +1,9 @@
+1.1.1 (2016-02-19)
+--
+Bugfixes:
+
+* Fix regression in code smell
+
 1.1.O (2016-02-19)
 --
 Improvements:

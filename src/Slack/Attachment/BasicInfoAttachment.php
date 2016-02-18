@@ -46,17 +46,25 @@ class BasicInfoAttachment extends Attachment
 
         $this->addField(new Field('When', $this->record['datetime']->format('d/m/Y H:m:i'), true));
 
-        if (!empty($this->record['context'])) {
-            $this->addField(new Field('Context', json_encode($this->record['context'])));
-        }
-
-        if (!empty($this->record['extra'])) {
-            $this->addField(new Field('Extra', json_encode($this->record['extra'])));
-        }
+        $this->addRecordDataAsJsonEncodedField('context', 'Context');
+        $this->addRecordDataAsJsonEncodedField('extra', 'Extra');
 
         if ($this->error !== null) {
             $this->addField(new Field('Line', $this->error->getLine(), true));
             $this->addField(new Field('File', $this->error->getFile()));
+        }
+    }
+
+    /**
+     * Check if a key is available in the record. If so, add it as a field.
+     *
+     * @param string $key
+     * @param string $label
+     */
+    private function addRecordDataAsJsonEncodedField($key, $label)
+    {
+        if (!empty($this->record[$key])) {
+            $this->addField(new Field($label, json_encode($this->record[$key])));
         }
     }
 
