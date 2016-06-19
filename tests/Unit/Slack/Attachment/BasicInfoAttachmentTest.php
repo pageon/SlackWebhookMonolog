@@ -45,4 +45,25 @@ class BasicInfoAttachmentTest extends PHPUnit_Framework_TestCase
         $this->assertSame('Extra', $context['title']);
         $this->assertSame(json_encode(['foo' => 'bar']), $context['value']);
     }
+
+    public function testIncludesDateStamp()
+    {
+        $date = new \DateTime();
+        $record = [
+            'message' => 'foo',
+            'level' => Logger::ALERT,
+            'level_name' => 'ALERT',
+            'datetime' => $date,
+            'extra' => ['foo' => 'bar'],
+        ];
+
+        $attachment = new BasicInfoAttachment($record);
+        $data = $attachment->get();
+
+        $this->assertArrayHasKey(1, $data['fields']);
+        $when = $data['fields'][1]->jsonSerialize();
+
+        $this->assertSame('When', $when['title']);
+        $this->assertSame($date->format('d/m/Y H:i:s'), $when['value']);
+    }
 }

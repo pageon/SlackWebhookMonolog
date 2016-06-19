@@ -44,7 +44,7 @@ class BasicInfoAttachment extends Attachment
         $this->setText(sprintf('*Error:* %s', $this->record['level_name']));
         $this->addField(new Field('What', $message));
 
-        $this->addField(new Field('When', $this->record['datetime']->format('d/m/Y H:m:i'), true));
+        $this->addField(new Field('When', $this->record['datetime']->format('d/m/Y H:i:s'), true));
 
         $this->addRecordDataAsJsonEncodedField('context', 'Context');
         $this->addRecordDataAsJsonEncodedField('extra', 'Extra');
